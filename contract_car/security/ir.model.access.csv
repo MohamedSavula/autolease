@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+contract_car.access_contract_car,access_contract_car,contract_car.model_contract_car,base.group_user,1,1,1,1
+contract_car.access_deposit_car,access_deposit_car,contract_car.model_deposit_car,base.group_user,1,1,1,1
