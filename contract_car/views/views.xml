@@ -9,6 +9,7 @@
                     <field name="partner_id"/>
                     <field name="city"/>
                     <field name="mobile"/>
+                    <field name="analytic_account_id"/>
                 </tree>
             </field>
         </record>
@@ -18,6 +19,11 @@
             <field name="arch" type="xml">
                 <form string="Contract Car Form">
                     <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
                         <group>
                             <group>
                                 <field name="partner_id"/>
@@ -43,6 +49,8 @@
                                 <field name="email" widget="email"/>
                                 <field name="website" string="Website" widget="url"
                                        placeholder="e.g. https://www.odoo.com"/>
+                                <field name="analytic_account_id"/>
+                                <field name="sale_order_id" readonly="1"/>
                             </group>
                         </group>
                         <notebook>

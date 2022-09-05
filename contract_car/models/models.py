@@ -16,8 +16,9 @@ class ContractCar(models.Model):
     _name = 'contract.car'
     _description = 'Contract Car'
 
-    name = fields.Char(string='Reference')
+    name = fields.Char(string="Name", default=lambda self: 'New')
     partner_id = fields.Many2one('res.partner', string='Customer', required=True)
+    analytic_account_id = fields.Many2one('account.analytic.account', 'Analytic Account')
     vat = fields.Char(string='Tax ID', )
     website = fields.Char('Website Link')
     street = fields.Char()
@@ -95,6 +96,7 @@ class ContractCar(models.Model):
     less_total_deposit = fields.Float(string="Less Total Deposit", required=False, )
     net_due = fields.Float(string="Net Due", required=False, )
     refund = fields.Float(string="Net Due", required=False, )
+    sale_order_id = fields.Many2one(comodel_name="sale.order", string="Sales Order")
 
     @api.onchange('partner_id')
     def data_customer(self):
@@ -113,3 +115,9 @@ class ContractCar(models.Model):
                 rec.phone = rec.partner_id.phone
                 rec.mobile = rec.partner_id.mobile
                 rec.company_id = rec.partner_id.company_id.id
+
+    @api.model
+    def create(self, vals):
+        if not vals.get('name'):
+            vals['name'] = self.env['ir.sequence'].next_by_code('contract.car')
+        return super(ContractCar, self).create(vals)
