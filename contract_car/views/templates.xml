@@ -1,24 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-<!--
-        <template id="listing">
-          <ul>
-            <li t-foreach="objects" t-as="object">
-              <a t-attf-href="#{ root }/objects/#{ object.id }">
-                <t t-esc="object.display_name"/>
-              </a>
-            </li>
-          </ul>
-        </template>
-        <template id="object">
-          <h1><t t-esc="object.display_name"/></h1>
-          <dl>
-            <t t-foreach="object._fields" t-as="field">
-              <dt><t t-esc="field"/></dt>
-              <dd><t t-esc="object[field]"/></dd>
+        <template id="id_template_contract_car">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <t t-foreach="docs" t-as="o">
+                        <br/>
+                        <table width="100%">
+                            <tr>
+                                <td width="33%" class="font-weight-bold text-center" style="font-size: 27px;">Autolease
+                                    Company
+                                </td>
+                                <td width="33%"/>
+                                <td width="33%" class="font-weight-bold text-center" style="font-size: 35px;">شركة
+                                    أوتوليز
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center" style="font-size: 13px;">2040 Al Miraag City-Maadi-Cairo</td>
+                                <td style="font-size: 17px;" class="font-weight-bold text-center">NS (<span
+                                        t-field="o.sale_order_id.name"/>)
+                                </td>
+                                <td class="text-center" style="font-size: 13px;">٢٠٤٠ مدينة المعراج-المعادى-القاهرة</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center" style="font-size: 13px;">Tel :- (202)25177410 - (202)25177481
+                                </td>
+                                <td/>
+                                <td class="text-center" style="font-size: 13px;">تليفون : ٢٥١٧٧٤١٠ (٢٠٢) - ٢٥١٧٧٤٨١
+                                    (٢٠٢)
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="row col-12">
+                            <table style="border: 1px solid #000000; font-size: 9px;" width="35%">
+                                <tr>
+                                    <td width="15%" class="text-center">Name</td>
+                                    <td width="70%" class="text-center">
+                                        <span t-field="o.partner_id.name"/>
+                                    </td>
+                                    <td width="15%" class="text-center">الاسم</td>
+                                </tr>
+                                <tr>
+                                    <td width="15%" class="text-center">Job</td>
+                                    <td width="70%">
+                                        <!--                                        <span t-field="o.partner_id.name"/>-->
+                                    </td>
+                                    <td width="15%" class="text-center">الوظيفة</td>
+                                </tr>
+                                <tr>
+                                    <td width="18%" class="text-left" style="font-size: 7px;">Home Address</td>
+                                    <td width="67%">
+                                        <!--                                        <span t-field="o.partner_id.name"/>-->
+                                    </td>
+                                    <td width="15%" class="text-center">العنوان</td>
+                                </tr>
+                                <tr>
+                                    <td width="15%" class="text-center">Phone</td>
+                                    <td width="70%">
+                                        <!--                                        <span t-field="o.partner_id.name"/>-->
+                                    </td>
+                                    <td width="15%" class="text-center">التليفون</td>
+                                </tr>
+                                <tr>
+                                    <td width="15%" class="text-center">Mobile</td>
+                                    <td width="70%">
+                                        <!--                                        <span t-field="o.partner_id.name"/>-->
+                                    </td>
+                                    <td width="15%" class="text-center">محمول</td>
+                                </tr>
+                            </table>
+                            <table style="border: 1px solid #000000; font-size: 9px;" width="30%">
+                                <tr>
+                                    <td width="25%" class="text-center">KMSIN</td>
+                                    <td width="50%" class="text-center">
+                                        <span t-field="o.kms_in"/>
+                                    </td>
+                                    <td width="25%" class="text-center">ك م دخول</td>
+                                </tr>
+                                <tr>
+                                    <td width="25%" class="text-center">Plate No</td>
+                                    <td width="50%" class="text-center">
+                                        <span t-field="o.plate_no"/>
+                                    </td>
+                                    <td width="25%" class="text-center">رقم اللوحة</td>
+                                </tr>
+                                <tr>
+                                    <td width="25%" class="text-center">KMSOUT</td>
+                                    <td width="50%" class="text-center">
+                                        <span t-field="o.kos_out"/>
+                                    </td>
+                                    <td width="25%" class="text-center">ك م خروج</td>
+                                </tr>
+                                <tr>
+                                    <td width="25%" class="text-center">Model No</td>
+                                    <td width="50%" class="text-center">
+                                        <span t-field="o.model_no"/>
+                                    </td>
+                                    <td width="25%" class="text-center">رقم الموديل</td>
+                                </tr>
+                                <tr>
+                                    <td width="25%" class="text-center">KMS Driven</td>
+                                    <td width="50%" class="text-center">
+<!--                                        <span t-field="o.model_no"/>-->
+                                    </td>
+                                    <td width="25%" class="text-center">ك م مستخدم</td>
+                                </tr>
+                            </table>
+                            <table style="border: 1px solid #000000; font-size: 9px;" width="35%">
+                                <tr>
+                                    <td width="30%" class="text-right">only valid a lax
+                                    </td>
+                                    <td width="43%" class="text-left"> invoice when charges paid</td>
+                                    <td width="27%" class="text-left"> in cash to</td>
+                                </tr>
+                                <tr>
+                                    <td width="30%" class="text-right">Autolease Co.
+                                    </td>
+                                    <td width="43%" class="text-left">immediately al end of rental</td>
+                                    <td width="27%"></td>
+                                </tr>
+                                <tr>
+                                    <td width="30%" class="text-center">Date and time in</td>
+                                    <td width="40%" class="text-center">
+                                        <span t-field="o.date_car_in"/>
+                                    </td>
+                                    <td width="30%" class="text-right">تاريخ العودة والساعة</td>
+                                </tr>
+                                <tr>
+                                    <td width="30%" class="text-center">Date and time out</td>
+                                    <td width="40%" class="text-center">
+                                        <span t-field="o.date_car_out"/>
+                                    </td>
+                                    <td width="30%" class="text-right" style="font-size: 8px;">تاريخ الخروج والساعة</td>
+                                </tr>
+                                <tr>
+                                    <td width="30%" class="text-center">Date and time out</td>
+                                    <td width="40%" class="text-center">
+                                        <span t-field="o.date_car_out"/>
+                                    </td>
+                                    <td width="30%" class="text-right" style="font-size: 8px;">تاريخ الخروج والساعة</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="row col-12">
+                            <table style="border: 1px solid #000000; font-size: 9px;" width="35%">
+                                <tr>
+                                    <td width="15%" class="text-center">Name</td>
+                                    <td width="70%" class="text-center">
+                                        <span t-field="o.partner_id.name"/>
+                                    </td>
+                                    <td width="15%" class="text-center">الاسم</td>
+                                </tr>
+                                <tr>
+                                    <td width="15%" class="text-center">Job</td>
+                                    <td width="70%">
+                                        <!--                                        <span t-field="o.partner_id.name"/>-->
+                                    </td>
+                                    <td width="15%" class="text-center">الوظيفة</td>
+                                </tr>
+                                <tr>
+                                    <td width="18%" class="text-left" style="font-size: 7px;">Home Address</td>
+                                    <td width="67%">
+                                        <!--                                        <span t-field="o.partner_id.name"/>-->
+                                    </td>
+                                    <td width="15%" class="text-center">العنوان</td>
+                                </tr>
+                                <tr>
+                                    <td width="15%" class="text-center">Phone</td>
+                                    <td width="70%">
+                                        <!--                                        <span t-field="o.partner_id.name"/>-->
+                                    </td>
+                                    <td width="15%" class="text-center">التليفون</td>
+                                </tr>
+                                <tr>
+                                    <td width="15%" class="text-center">Mobile</td>
+                                    <td width="70%">
+                                        <!--                                        <span t-field="o.partner_id.name"/>-->
+                                    </td>
+                                    <td width="15%" class="text-center">محمول</td>
+                                </tr>
+                            </table>
+                            <table style="border: 1px solid #000000; font-size: 9px;" width="30%">
+                                <tr>
+                                    <td width="25%" class="text-center">KMSIN</td>
+                                    <td width="50%" class="text-center">
+                                        <span t-field="o.kms_in"/>
+                                    </td>
+                                    <td width="25%" class="text-center">ك م دخول</td>
+                                </tr>
+                                <tr>
+                                    <td width="25%" class="text-center">Plate No</td>
+                                    <td width="50%" class="text-center">
+                                        <span t-field="o.plate_no"/>
+                                    </td>
+                                    <td width="25%" class="text-center">رقم اللوحة</td>
+                                </tr>
+                                <tr>
+                                    <td width="25%" class="text-center">KMSOUT</td>
+                                    <td width="50%" class="text-center">
+                                        <span t-field="o.kos_out"/>
+                                    </td>
+                                    <td width="25%" class="text-center">ك م خروج</td>
+                                </tr>
+                                <tr>
+                                    <td width="25%" class="text-center">Model No</td>
+                                    <td width="50%" class="text-center">
+                                        <span t-field="o.model_no"/>
+                                    </td>
+                                    <td width="25%" class="text-center">رقم الموديل</td>
+                                </tr>
+                                <tr>
+                                    <td width="25%" class="text-center">KMS Driven</td>
+                                    <td width="50%" class="text-center">
+<!--                                        <span t-field="o.model_no"/>-->
+                                    </td>
+                                    <td width="25%" class="text-center">ك م مستخدم</td>
+                                </tr>
+                            </table>
+                            <table style="border: 1px solid #000000; font-size: 9px;" width="35%">
+                                <tr>
+                                    <td width="30%" class="text-right">only valid a lax
+                                    </td>
+                                    <td width="43%" class="text-left"> invoice when charges paid</td>
+                                    <td width="27%" class="text-left"> in cash to</td>
+                                </tr>
+                                <tr>
+                                    <td width="30%" class="text-right">Autolease Co.
+                                    </td>
+                                    <td width="43%" class="text-left">immediately al end of rental</td>
+                                    <td width="27%"></td>
+                                </tr>
+                                <tr>
+                                    <td width="30%" class="text-center">Date and time in</td>
+                                    <td width="40%" class="text-center">
+                                        <span t-field="o.date_car_in"/>
+                                    </td>
+                                    <td width="30%" class="text-right">تاريخ العودة والساعة</td>
+                                </tr>
+                                <tr>
+                                    <td width="30%" class="text-center">Date and time out</td>
+                                    <td width="40%" class="text-center">
+                                        <span t-field="o.date_car_out"/>
+                                    </td>
+                                    <td width="30%" class="text-right" style="font-size: 8px;">تاريخ الخروج والساعة</td>
+                                </tr>
+                                <tr>
+                                    <td width="30%" class="text-center">Date and time out</td>
+                                    <td width="40%" class="text-center">
+                                        <span t-field="o.date_car_out"/>
+                                    </td>
+                                    <td width="30%" class="text-right" style="font-size: 8px;">تاريخ الخروج والساعة</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </t>
+                </t>
             </t>
-          </dl>
         </template>
--->
     </data>
 </odoo>

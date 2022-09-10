@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id="id_sale_order_view_form_inherit_add_analytic" model="ir.ui.view">
+        <record id="id_analytic_account_inherit_add_fields" model="ir.ui.view">
             <field name="name">sale.order.view.form.inherit.add.analytic</field>
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom_qty']" position="before">
                     <field name="analytic_account_id"/>
+                    <field name="engine_number"/>
+                    <field name="chassis_number"/>
+                    <field name="plate_no"/>
+                    <field name="model_number"/>
+                    <field name="license_date"/>
+                </xpath>
+                <xpath expr="//field[@name='date_order']" position="after">
+                    <field name="date_and_time_in"/>
                 </xpath>
                 <xpath expr="//header" position="inside">
                     <field name="contract_car_ids" invisible="1"/>
@@ -16,11 +24,72 @@
                             class="btn-primary" type="object"/>
                 </xpath>
                 <xpath expr="//div[@name='button_box']" position="inside">
-                    <button name="show_contract_car" type="object" class="oe_stat_button" icon="fa-archive" attrs="{'invisible': [('contract_car_ids','=',[])]}">
+                    <button name="show_contract_car" type="object" class="oe_stat_button" icon="fa-archive"
+                            attrs="{'invisible': [('contract_car_ids','=',[])]}">
                         <div class="o_field_widget o_stat_info">
                             <span class="o_stat_text">Contracts Car</span>
                         </div>
                     </button>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Analytic Group">
+                        <field name="analytic_group_ids">
+                            <tree>
+                                <field name="groups_analytic_id" readonly="1"/>
+                                <field name="car_numbers" readonly="1"/>
+                                <field name="rental_value" readonly="1"/>
+                                <field name="subtotal" readonly="1"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        <record id="account_analytic_account_view_form_inherit" model="ir.ui.view">
+            <field name="name">account.analytic.account.form.inherit.add.fields</field>
+            <field name="model">account.analytic.account</field>
+            <field name="inherit_id" ref="analytic.view_account_analytic_account_form"/>
+            <field eval="40" name="priority"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='group_id']" position="after">
+                    <field name="engine_number"/>
+                    <field name="chassis_number"/>
+                    <field name="plate_no"/>
+                    <field name="model_number"/>
+                </xpath>
+                <xpath expr="//field[@name='code']" position="after">
+                    <field name="rent_amount"/>
+                    <field name="license_date"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="id_view_move_form_inherit_add_page" model="ir.ui.view">
+            <field name="name">view move form inherit add page</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Analytic Group">
+                        <field name="analytic_group_ids">
+                            <tree>
+                                <field name="groups_analytic_id" readonly="1"/>
+                                <field name="days" readonly="1"/>
+                                <field name="car_numbers" readonly="1"/>
+                                <field name="rental_value" readonly="1"/>
+                                <field name="subtotal" readonly="1"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        <record id="id_account_analytic_group_form_view" model="ir.ui.view">
+            <field name="name">account.analytic.group.form.view</field>
+            <field name="model">account.analytic.group</field>
+            <field name="inherit_id" ref="analytic.account_analytic_group_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='parent_id']" position="after">
+                    <field name="rent_amount"/>
                 </xpath>
             </field>
         </record>

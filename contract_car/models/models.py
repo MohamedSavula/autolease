@@ -61,6 +61,8 @@ class ContractCar(models.Model):
     ex_kms = fields.Char(string="EX KMS", required=False, )
     plate_no = fields.Char(string="Plate NO", required=False, )
     model_no = fields.Char(string="Model NO", required=False, )
+    engine_number = fields.Char(string="Engine Number", required=False, )
+    chassis_number = fields.Char(string="Chassis Number", required=False, )
     gas_out = fields.Selection(string="Gas In",
                                selection=[('e', 'E'), ('1', '1/4'), ('2', '1/2'), ('3', '3/4'), ('f', 'F'), ],
                                required=False, )
@@ -121,3 +123,4 @@ class ContractCar(models.Model):
         if not vals.get('name'):
             vals['name'] = self.env['ir.sequence'].next_by_code('contract.car')
         return super(ContractCar, self).create(vals)
+
