@@ -26,6 +26,8 @@
     'data': [
         'security/ir.model.access.csv',
         'views/views.xml',
+        'views/print_invoice.xml',
+        'views/templates.xml',
     ],
     'license': 'LGPL-3',
 }

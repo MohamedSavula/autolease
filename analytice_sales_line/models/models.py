@@ -31,11 +31,14 @@ class AnalyticGroup(models.Model):
     days = fields.Integer(string="Days")
     rental_value = fields.Float(string="Rental value", related="groups_analytic_id.rent_amount", store=True)
     subtotal = fields.Float(string="Subtotal", compute="get_subtotal")
+    tax_ids = fields.Many2many(comodel_name='account.tax', string="Taxes")
+    amount_tax = fields.Float(compute="get_subtotal", store=True)
 
     @api.depends('car_numbers', 'rental_value')
     def get_subtotal(self):
         for rec in self:
             rec.subtotal = rec.car_numbers * rec.rental_value
+            rec.amount_tax = [tax.amount * rec.subtotal / 100 for tax in rec.tax_ids]
 
     def unlink(self):
         for rec in self:
@@ -52,14 +55,34 @@ class AccountMoveInherit(models.Model):
     _inherit = 'account.move'
 
     analytic_group_ids = fields.One2many(comodel_name="analytic.group", inverse_name="account_move_id")
+    total_subtotal = fields.Float(string="Total", compute="get_total_with_tax", store=True)
+    amount_tax_customize = fields.Float(string="Total", compute="get_total_with_tax", store=True)
+    total_subtotal_with = fields.Float(string="Total With Tax", compute="get_total_with_tax", store=True)
+    amount_to_text_customize = fields.Char(string="", required=False, compute="get_amount_to_text")
+
+    @api.depends('total_subtotal_with')
+    def get_amount_to_text(self):
+        for rec in self:
+            rec.amount_to_text_customize = rec.currency_id.amount_to_text(rec.total_subtotal_with).replace('and',
+                                                                                                           'و') + " فقط لا غير"
+
+    @api.depends('analytic_group_ids')
+    def get_total_with_tax(self):
+        for rec in self:
+            rec.total_subtotal = sum(list(rec.analytic_group_ids.mapped('subtotal')))
+            rec.amount_tax_customize = sum(list(rec.analytic_group_ids.mapped('amount_tax')))
+            rec.total_subtotal_with = rec.total_subtotal + rec.amount_tax_customize
 
     def get_analytic_group_lines(self):
         for rec in self:
             rec.analytic_group_ids = False
             rec.analytic_group_ids = [(0, 0, {
                 'groups_analytic_id': line.id,
-                'car_numbers': sum(list(rec.invoice_line_ids.filtered(lambda l: l.groups_analytic_id == line).mapped('quantity'))),
+                'car_numbers': sum(
+                    list(rec.invoice_line_ids.filtered(lambda l: l.groups_analytic_id == line).mapped('quantity'))),
                 'days': sum(list(rec.invoice_line_ids.filtered(lambda l: l.groups_analytic_id == line).mapped('days'))),
+                'tax_ids': sum(
+                    list(rec.invoice_line_ids.filtered(lambda l: l.groups_analytic_id == line).mapped('tax_ids'))),
             }) for line in set(rec.invoice_line_ids.mapped('groups_analytic_id'))]
 
 
@@ -86,7 +109,8 @@ class SaleOrderInherit(models.Model):
             rec.analytic_group_ids = False
             rec.analytic_group_ids = [(0, 0, {
                 'groups_analytic_id': line.id,
-                'car_numbers': sum(list(rec.order_line.filtered(lambda l: l.groups_analytic_id == line).mapped('product_uom_qty'))),
+                'car_numbers': sum(
+                    list(rec.order_line.filtered(lambda l: l.groups_analytic_id == line).mapped('product_uom_qty'))),
             }) for line in set(rec.order_line.mapped('groups_analytic_id'))]
 
     def create_contract_car(self):
@@ -142,12 +166,13 @@ class SaleOrderLineInherit(models.Model):
             rec.model_number = rec.analytic_account_id.model_number
             rec.license_date = rec.analytic_account_id.license_date
 
-    @api.onchange('product_uom', 'product_uom_qty','analytic_account_id')
+    @api.onchange('product_uom', 'product_uom_qty', 'analytic_account_id')
     def product_uom_change(self):
-        res=super(SaleOrderLineInherit, self).product_uom_change()
+        res = super(SaleOrderLineInherit, self).product_uom_change()
         self.price_unit = self.analytic_account_id.rent_amount
 
         return res
+
     def _prepare_invoice_line(self, **optional_values):
         invoice_line = super(SaleOrderLineInherit, self)._prepare_invoice_line(**optional_values)
         invoice_line['analytic_account_id'] = self.analytic_account_id.id
