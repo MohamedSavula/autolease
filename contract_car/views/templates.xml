@@ -33,7 +33,7 @@
                             </tr>
                         </table>
                         <div class="row col-12">
-                            <table style="border: 1px solid #000000; font-size: 9px;" width="35%">
+                            <table  class="table-bordered" style="border: 1px solid #000000; font-size: 9px;" width="35%">
                                 <tr>
                                     <td width="15%" class="text-center">Name</td>
                                     <td width="70%" class="text-center">
@@ -70,7 +70,7 @@
                                     <td width="15%" class="text-center">محمول</td>
                                 </tr>
                             </table>
-                            <table style="border: 1px solid #000000; font-size: 9px;" width="30%">
+                            <table  class="table-bordered" style="border: 1px solid #000000; font-size: 9px;" width="30%">
                                 <tr>
                                     <td width="25%" class="text-center">KMSIN</td>
                                     <td width="50%" class="text-center">
@@ -102,23 +102,16 @@
                                 <tr>
                                     <td width="25%" class="text-center">KMS Driven</td>
                                     <td width="50%" class="text-center">
-<!--                                        <span t-field="o.model_no"/>-->
+                                        <!--                                        <span t-field="o.model_no"/>-->
                                     </td>
                                     <td width="25%" class="text-center">ك م مستخدم</td>
                                 </tr>
                             </table>
-                            <table style="border: 1px solid #000000; font-size: 9px;" width="35%">
+                            <table  class="table-bordered" style="border: 1px solid #000000; font-size: 9px;" width="35%">
                                 <tr>
-                                    <td width="30%" class="text-right">only valid a lax
+                                    <td width="30%" class="text-center" colspan="3">only valid a lax invoice when charges paid <br/>in cash to Autolease Co.immediately<br/> al end of rental
                                     </td>
-                                    <td width="43%" class="text-left"> invoice when charges paid</td>
-                                    <td width="27%" class="text-left"> in cash to</td>
-                                </tr>
-                                <tr>
-                                    <td width="30%" class="text-right">Autolease Co.
-                                    </td>
-                                    <td width="43%" class="text-left">immediately al end of rental</td>
-                                    <td width="27%"></td>
+
                                 </tr>
                                 <tr>
                                     <td width="30%" class="text-center">Date and time in</td>
@@ -134,126 +127,286 @@
                                     </td>
                                     <td width="30%" class="text-right" style="font-size: 8px;">تاريخ الخروج والساعة</td>
                                 </tr>
-                                <tr>
-                                    <td width="30%" class="text-center">Date and time out</td>
-                                    <td width="40%" class="text-center">
-                                        <span t-field="o.date_car_out"/>
-                                    </td>
-                                    <td width="30%" class="text-right" style="font-size: 8px;">تاريخ الخروج والساعة</td>
-                                </tr>
+<!--                                <tr>-->
+<!--                                    <td width="30%" class="text-center">Date and time out</td>-->
+<!--                                    <td width="40%" class="text-center">-->
+<!--                                        <span t-field="o.date_car_out"/>-->
+<!--                                    </td>-->
+<!--                                    <td width="30%" class="text-right" style="font-size: 8px;">تاريخ الخروج والساعة</td>-->
+<!--                                </tr>-->
                             </table>
                         </div>
                         <div class="row col-12">
-                            <table style="border: 1px solid #000000; font-size: 9px;" width="35%">
+                            <table class="table-bordered" style="border: 1px solid #000000; font-size: 9px;"
+                                   width="35%">
                                 <tr>
-                                    <td width="15%" class="text-center">Name</td>
-                                    <td width="70%" class="text-center">
-                                        <span t-field="o.partner_id.name"/>
+                                    <td width="50%" class="text-center">licance NO<br/>رقم رخصة القيادة<br/>.....
                                     </td>
-                                    <td width="15%" class="text-center">الاسم</td>
+                                    <td width="50%" class="text-center">Date of issuse<br/>تاريخ الاصدار<br/>.....
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td width="15%" class="text-center">Job</td>
-                                    <td width="70%">
-                                        <!--                                        <span t-field="o.partner_id.name"/>-->
+                                    <td width="50%" class="text-center">Issuse by<br/>صادر من<br/>.....
                                     </td>
-                                    <td width="15%" class="text-center">الوظيفة</td>
+                                    <td width="50%" class="text-center">Expiry Date<br/>تاريخ الانهاء<br/>.....
+                                    </td>
+
                                 </tr>
                                 <tr>
-                                    <td width="18%" class="text-left" style="font-size: 7px;">Home Address</td>
-                                    <td width="67%">
-                                        <!--                                        <span t-field="o.partner_id.name"/>-->
+                                    <td width="50%" class="text-center">Date of Birth<br/>تاريخ الميلاد<br/>.....
                                     </td>
-                                    <td width="15%" class="text-center">العنوان</td>
+                                    <td width="50%" class="text-center">Nationalty<br/>الجنسيه<br/>.....
+                                    </td>
+
                                 </tr>
                                 <tr>
-                                    <td width="15%" class="text-center">Phone</td>
-                                    <td width="70%">
-                                        <!--                                        <span t-field="o.partner_id.name"/>-->
+                                    <td width="50%" class="text-center">passport<br/>رقم جواز السفر\البطاقة<br/>.....
                                     </td>
-                                    <td width="15%" class="text-center">التليفون</td>
+                                    <td width="50%" class="text-center">Date of Issue<br/>تاريخ الاصدار<br/>.....
+                                    </td>
+
                                 </tr>
                                 <tr>
-                                    <td width="15%" class="text-center">Mobile</td>
-                                    <td width="70%">
-                                        <!--                                        <span t-field="o.partner_id.name"/>-->
+                                    <td class="text-center" colspan="2">Number of Days ----------- عدد الايام</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center" colspan="2">Driver ----------- السائق</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center" colspan="2">Additional Driver ----------- السائق الاضافي
                                     </td>
-                                    <td width="15%" class="text-center">محمول</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        tttttttttttttttttttttttttttttttt
+                                    </td>
+                                    <td>
+                                        <table width="100%">
+                                            <tr>
+                                                <td class="text-center" colspan="2">CDW Rate</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">Accept
+                                                    <br/>
+                                                    .....
+                                                </td>
+                                                <td class="text-center">Decline
+                                                    <br/>
+                                                    ...........
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        tttttttttttttttttttttttttttttttt
+                                    </td>
+                                    <td>
+                                        <table width="100%">
+                                            <tr>
+                                                <td class="text-center" colspan="2">التأمين علي السيارة</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">Accept
+                                                    <br/>
+                                                    .....
+                                                </td>
+                                                <td class="text-center">Decline
+                                                    <br/>
+                                                    ...........
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center" colspan="2">Cash() Charge() Voucher()</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center" colspan="2">Voucher No ............</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center" colspan="2">Voucher Value ............</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center" colspan="2">Credit Card No ............</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center" colspan="2">Type ............</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center" colspan="2">Approval No ............Explry .....</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center" colspan="2">ttttttttttttttttttttttt<br/>بببببببببببببببببببب
+                                        <br/>sssssssss
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center" colspan="2">Full Name ----------- الاسم بالكامل
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center" colspan="2">Signature ----------- التوقيع
+                                    </td>
+                                </tr>
+
+                            </table>
+                            <table class="table-bordered" style="border: 1px solid #000000; font-size: 9px;"
+                                   width="30%">
+                                <tr>
+                                    <td class="text-center" colspan="3">KMS ALLOWED ----------- ك.م مسموح</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center" colspan="3">EX KMS ----------- ك.م زيادة</td>
+                                </tr>
+                                <tr class="table-bordered">
+                                    <td width="10" class="text-center">NO</td>
+                                    <td width="45" class="text-center">DEPOSIT</td>
+                                    <td width="45" class="text-center">DATE</td>
+                                </tr>
+                                <t t-set="n" t-value="0"/>
+                                <t t-foreach="o.deposit_ids" t-as="line_d">
+                                    <t t-set="n" t-value="n+1"/>
+                                    <tr class="table-bordered">
+                                        <td width="10" class="text-center"><span t-esc="n"/></td>
+                                        <td width="45" class="text-center"><span t-field="line_d.deposit"/></td>
+                                        <td width="45" class="text-center"><span t-field="line_d.deposit_date"/></td>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <td colspan="3">RES.NO</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">Gas In .........</td>
+                                </tr> <tr>
+                                    <td colspan="3">Gas Out .........</td>
                                 </tr>
                             </table>
-                            <table style="border: 1px solid #000000; font-size: 9px;" width="30%">
-                                <tr>
-                                    <td width="25%" class="text-center">KMSIN</td>
-                                    <td width="50%" class="text-center">
-                                        <span t-field="o.kms_in"/>
-                                    </td>
-                                    <td width="25%" class="text-center">ك م دخول</td>
+                            <table class="table-bordered" style="border: 1px solid #000000; font-size: 9px;"
+                                   width="35%">
+                                <tr class="table-bordered">
+                                    <td class="text-center" width="25%">Days</td>
+                                    <td class="text-center" width="25%"></td>
+                                    <td class="text-center" colspan="2"></td>
                                 </tr>
-                                <tr>
-                                    <td width="25%" class="text-center">Plate No</td>
-                                    <td width="50%" class="text-center">
-                                        <span t-field="o.plate_no"/>
-                                    </td>
-                                    <td width="25%" class="text-center">رقم اللوحة</td>
+                                <tr class="table-bordered">
+                                    <td class="text-center" width="25%">EXHOURS</td>
+                                    <td class="text-center" width="25%"></td>
+                                    <td class="text-center" colspan="2"></td>
                                 </tr>
-                                <tr>
-                                    <td width="25%" class="text-center">KMSOUT</td>
-                                    <td width="50%" class="text-center">
-                                        <span t-field="o.kos_out"/>
-                                    </td>
-                                    <td width="25%" class="text-center">ك م خروج</td>
+                                <tr class="table-bordered">
+                                    <td class="text-center" width="25%">WEEKS AT</td>
+                                    <td class="text-center" width="25%"></td>
+                                    <td class="text-center" colspan="2"></td>
                                 </tr>
-                                <tr>
-                                    <td width="25%" class="text-center">Model No</td>
-                                    <td width="50%" class="text-center">
-                                        <span t-field="o.model_no"/>
-                                    </td>
-                                    <td width="25%" class="text-center">رقم الموديل</td>
+                                <tr class="table-bordered">
+                                    <td class="text-center" width="25%">EX.KM</td>
+                                    <td class="text-center" width="25%"></td>
+                                    <td class="text-center" colspan="2"></td>
                                 </tr>
-                                <tr>
-                                    <td width="25%" class="text-center">KMS Driven</td>
-                                    <td width="50%" class="text-center">
-<!--                                        <span t-field="o.model_no"/>-->
-                                    </td>
-                                    <td width="25%" class="text-center">ك م مستخدم</td>
+                                <tr class="table-bordered">
+                                    <td class="text-center" colspan="2">Subtotal   المبلغ الاجمالي</td>
+                                    <td class="text-center" colspan="2"></td>
                                 </tr>
-                            </table>
-                            <table style="border: 1px solid #000000; font-size: 9px;" width="35%">
-                                <tr>
-                                    <td width="30%" class="text-right">only valid a lax
-                                    </td>
-                                    <td width="43%" class="text-left"> invoice when charges paid</td>
-                                    <td width="27%" class="text-left"> in cash to</td>
+                                <tr class="table-bordered">
+                                    <td class="text-center" colspan="2">Discount %   ناقص</td>
+                                    <td class="text-center" colspan="2"></td>
                                 </tr>
-                                <tr>
-                                    <td width="30%" class="text-right">Autolease Co.
-                                    </td>
-                                    <td width="43%" class="text-left">immediately al end of rental</td>
-                                    <td width="27%"></td>
+                                <tr class="table-bordered">
+                                    <td class="text-center" colspan="2">Subtotal    الصافي</td>
+                                    <td class="text-center" colspan="2"></td>
                                 </tr>
-                                <tr>
-                                    <td width="30%" class="text-center">Date and time in</td>
-                                    <td width="40%" class="text-center">
-                                        <span t-field="o.date_car_in"/>
-                                    </td>
-                                    <td width="30%" class="text-right">تاريخ العودة والساعة</td>
+                                <tr class="table-bordered">
+                                    <td class="text-center" colspan="4">DELIVERY CHARGE ........</td>
                                 </tr>
-                                <tr>
-                                    <td width="30%" class="text-center">Date and time out</td>
-                                    <td width="40%" class="text-center">
-                                        <span t-field="o.date_car_out"/>
-                                    </td>
-                                    <td width="30%" class="text-right" style="font-size: 8px;">تاريخ الخروج والساعة</td>
+                                <tr class="table-bordered">
+                                    <td class="text-center" colspan="4">INSPECTION CHARGE ........</td>
                                 </tr>
-                                <tr>
-                                    <td width="30%" class="text-center">Date and time out</td>
-                                    <td width="40%" class="text-center">
-                                        <span t-field="o.date_car_out"/>
-                                    </td>
-                                    <td width="30%" class="text-right" style="font-size: 8px;">تاريخ الخروج والساعة</td>
+                                <tr class="table-bordered">
+                                    <td class="text-center" colspan="4">PAI ........</td>
                                 </tr>
+                                <tr class="table-bordered">
+                                    <td class="text-center" colspan="4">SALES TAX 10% ........</td>
+                                </tr>
+                                <tr class="table-bordered">
+                                    <td class="text-center" colspan="2">CDW ........</td>
+                                    <td class="text-center" colspan="2">500$</td>
+                                </tr>
+                                <tr class="table-bordered">
+                                    <td class="text-center" colspan="2">REFUELLING</td>
+                                    <td class="text-center" colspan="2"></td>
+                                </tr>
+                                <tr class="table-bordered">
+                                    <td class="text-center" colspan="2">SERVICE</td>
+                                    <td class="text-center" colspan="2"></td>
+                                </tr>
+                                <tr class="table-bordered">
+                                    <td class="text-center" colspan="2">DRIVER PER DAY</td>
+                                    <td class="text-center" colspan="2"></td>
+                                </tr>
+                                <tr class="table-bordered">
+                                    <td class="text-center" colspan="2">ADDITIONAL HOURS</td>
+                                    <td class="text-center" colspan="2"></td>
+                                </tr>
+                                <tr class="table-bordered">
+                                    <td class="text-center" colspan="2">Subtotal الصافي</td>
+                                    <td class="text-center" colspan="2"></td>
+                                </tr>
+                                <tr class="table-bordered">
+                                    <td class="text-center" colspan="2">PLUS</td>
+                                    <td class="text-center" colspan="2"></td>
+                                </tr>
+                                <tr class="table-bordered">
+                                    <td class="text-center" colspan="2">LESS</td>
+                                    <td class="text-center" colspan="2"></td>
+                                </tr>
+                                <tr class="table-bordered">
+                                    <td class="text-center" colspan="2">TOTAL CHARGES</td>
+                                    <td class="text-center" colspan="2"></td>
+                                </tr>
+                                <tr class="table-bordered">
+                                    <td class="text-center" colspan="2">LESS TOTAL DEPOITS</td>
+                                    <td class="text-center" colspan="2"></td>
+                                </tr>
+                                <tr class="table-bordered">
+                                    <td class="text-center" colspan="2">NET DUE</td>
+                                    <td class="text-center" colspan="2"></td>
+                                </tr>
+                                <tr class="table-bordered">
+                                    <td class="text-center" colspan="2">REFUND</td>
+                                    <td class="text-center" colspan="2"></td>
+                                </tr>
+
                             </table>
                         </div>
+                        <br/>
+                        <table  style="border: 1px solid #dee2e6; font-size: 9px;"
+                                   width="100%">
+                                <tr style="border: 1px solid #dee2e6;">
+                                    <td width="11%">Prepared By</td>
+                                    <td width="11%"></td>
+                                    <td width="11%">أعد بواسظة</td>
+                                    <td width="11%">Finalised By</td>
+                                    <td width="11%"></td>
+                                    <td width="11%"> اقفل بواسظة</td>
+                                    <td width="11%">Checker</td>
+                                    <td width="11%"></td>
+                                    <td width="11%">روجع</td>
+                                </tr>
+                            <tr style="border: 1px solid #dee2e6;">
+                                <td colspan="3"> ttttttttttttttttttttttttttttttttttt</td>
+                                <td colspan="3"></td>
+                                <td colspan="3">سسسسسسسسسسسسسسسسسسسسسسسسسسسسسسسس</td>
+                            </tr>
+                            <tr style="border: 1px solid #dee2e6;">
+                                <td colspan="4" class="text-right"> امضاء السائق</td>
+                                <td colspan="5" class="text-right">امضاء العميل</td>
+                            </tr>
+                            </table>
                     </t>
                 </t>
             </t>
