@@ -20,11 +20,14 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'sale', 'contract_car'],
+    'depends': ['base', 'sale', 'contract_car', 'analytic', 'edit_account_asset'],
 
     # always loaded
     'data': [
+        'security/ir.model.access.csv',
         'views/views.xml',
+        'views/print_invoice.xml',
+        'views/templates.xml',
     ],
     'license': 'LGPL-3',
 }

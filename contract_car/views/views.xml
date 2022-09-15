@@ -102,13 +102,15 @@
                                         <field name="kos_out"/>
                                         <field name="kms_driven"/>
                                         <field name="kms_allowed"/>
+                                        <field name="gas_out" widget="radio" options="{'horizontal': true}"/>
+                                        <field name="gas_in" widget="radio" options="{'horizontal': true}"/>
                                     </group>
                                     <group>
                                         <field name="ex_kms"/>
                                         <field name="plate_no"/>
                                         <field name="model_no"/>
-                                        <field name="gas_out" widget="radio" options="{'horizontal': true}"/>
-                                        <field name="gas_in" widget="radio" options="{'horizontal': true}"/>
+                                        <field name="engine_number"/>
+                                        <field name="chassis_number"/>
                                     </group>
                                 </group>
                             </page>
