@@ -81,8 +81,7 @@ class AccountMoveInherit(models.Model):
                 'car_numbers': sum(
                     list(rec.invoice_line_ids.filtered(lambda l: l.groups_analytic_id == line).mapped('quantity'))),
                 'days': sum(list(rec.invoice_line_ids.filtered(lambda l: l.groups_analytic_id == line).mapped('days'))),
-                'tax_ids': sum(
-                    list(rec.invoice_line_ids.filtered(lambda l: l.groups_analytic_id == line).mapped('tax_ids'))),
+                'tax_ids': rec.invoice_line_ids.filtered(lambda l: l.groups_analytic_id == line).mapped('tax_ids').ids,
             }) for line in set(rec.invoice_line_ids.mapped('groups_analytic_id'))]
 
 
