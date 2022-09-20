@@ -68,6 +68,9 @@
             <field name="model">account.move</field>
             <field name="inherit_id" ref="account.view_move_form"/>
             <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_date']" position="after">
+                    <field name="rental_period" invisible="1"/>
+                </xpath>
                 <xpath expr="//notebook" position="inside">
                     <page string="Analytic Group">
                         <field name="analytic_group_ids">

@@ -25,7 +25,7 @@
                             </tr>
                             <tr>
                                 <td width="70%" class="text-right">
-<!--                                    <span t-field="o.partner_id.name"/>-->
+                                    <span t-if="o.analytic_group_ids" t-field="o.analytic_group_ids[0].groups_analytic_id.name"/>
                                 </td>
                                 <td width="30%" class="text-center">: نوع السيارة</td>
                             </tr>
@@ -37,7 +37,7 @@
                             </tr>
                             <tr>
                                 <td width="70%" class="text-right">
-<!--                                    <span t-field="o.invoice_date"/>-->
+                                    <span t-field="o.rental_period"/>
                                 </td>
                                 <td width="30%" class="text-center">: مدة الايجار</td>
                             </tr>
