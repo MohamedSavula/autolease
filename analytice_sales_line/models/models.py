@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from dateutil.relativedelta import relativedelta
 
 from odoo import models, fields, api
 
@@ -59,6 +60,12 @@ class AccountMoveInherit(models.Model):
     amount_tax_customize = fields.Float(string="Total", compute="get_total_with_tax", store=True)
     total_subtotal_with = fields.Float(string="Total With Tax", compute="get_total_with_tax", store=True)
     amount_to_text_customize = fields.Char(string="", required=False, compute="get_amount_to_text")
+    rental_period = fields.Date(compute="get_rental_period")
+
+    @api.depends('invoice_date')
+    def get_rental_period(self):
+        for rec in self:
+            rec.rental_period = rec.invoice_date + relativedelta(days=30) if rec.invoice_date else False
 
     @api.depends('total_subtotal_with')
     def get_amount_to_text(self):
