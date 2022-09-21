@@ -48,11 +48,42 @@
         </record>
         <template id="id_account_report_invoice_document_inherit_add_days" inherit_id="account.report_invoice_document">
             <xpath expr="//th[@name='th_description']" position="after">
-                <th name="th_days" class="text-left"><span>Days</span></th>
+                <th name="th_days" class="text-left">
+                    <span>Days</span>
+                </th>
             </xpath>
             <xpath expr="//td[@name='account_invoice_line_name']" position="after">
-                <td name="account_invoice_line_days"><span t-field="line.days"/></td>
+                <td name="account_invoice_line_days">
+                    <span t-field="line.days"/>
+                </td>
             </xpath>
         </template>
+        <record id="id_view_account_asset_inherit_add_fields" model="ir.ui.view">
+            <field name="name">view_account_asset_inherit_add_fields</field>
+            <field name="model">account.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group" position="after">
+                    <group string="Car Data">
+                        <group>
+                            <field name="engine_no"/>
+                            <field name="chassis_no"/>
+                            <field name="plate_no"/>
+                            <field name="model_no"/>
+                            <field name="Car_color"/>
+                            <field name="insurance_policy_no"/>
+                        </group>
+                        <group>
+                            <field name="rent_amount"/>
+                            <field name="license_date"/>
+                            <field name="branch_id"/>
+                            <field name="vendor_id"/>
+                            <field name="bank_and_check_no"/>
+                            <field name="invoice_no"/>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
     </data>
 </odoo>
