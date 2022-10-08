@@ -13,6 +13,8 @@
                     <field name="plate_no"/>
                     <field name="model_number"/>
                     <field name="license_date"/>
+                    <field name="rent_amount"/>
+                    <field name="rent_days"/>
                 </xpath>
                 <xpath expr="//field[@name='date_order']" position="after">
                     <field name="date_and_time_in"/>
@@ -37,6 +39,7 @@
                             <tree>
                                 <field name="groups_analytic_id" readonly="1"/>
                                 <field name="car_numbers" readonly="1"/>
+                                <field name="rent_days" readonly="1"/>
                                 <field name="rental_value" readonly="1"/>
                                 <field name="subtotal" readonly="1"/>
                             </tree>
@@ -71,13 +74,17 @@
                 <xpath expr="//field[@name='invoice_date']" position="after">
                     <field name="rental_period" invisible="1"/>
                 </xpath>
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']" position="before">
+                    <field name="rent_amount"/>
+                    <field name="rent_days"/>
+                </xpath>
                 <xpath expr="//notebook" position="inside">
                     <page string="Analytic Group">
                         <field name="analytic_group_ids">
                             <tree>
                                 <field name="groups_analytic_id" readonly="1"/>
-                                <field name="days" readonly="1"/>
                                 <field name="car_numbers" readonly="1"/>
+                                <field name="rent_days" readonly="1"/>
                                 <field name="rental_value" readonly="1"/>
                                 <field name="tax_ids" readonly="1"/>
                                 <field name="subtotal" readonly="1"/>
