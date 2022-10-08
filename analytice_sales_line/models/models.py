@@ -17,7 +17,7 @@ class AccountAnalyticAccountInherit(models.Model):
     chassis_number = fields.Char(string="Chassis Number", required=False, )
     plate_no = fields.Char(string="Plate No", required=False, )
     model_number = fields.Char(string="Model Number", required=False, )
-    rent_amount = fields.Float(string="Rent Amount", related="group_id.rent_amount")
+    rent_amount = fields.Float(string="Rent Amount")
     license_date = fields.Date(string="License Date", required=False, )
 
 
@@ -30,10 +30,13 @@ class AnalyticGroup(models.Model):
     groups_analytic_id = fields.Many2one(comodel_name="account.analytic.group", string="Analytic Group", required=True)
     car_numbers = fields.Integer(string="Car Numbers")
     days = fields.Integer(string="Days")
-    rental_value = fields.Float(string="Rental value", related="groups_analytic_id.rent_amount", store=True)
+    rent_days = fields.Integer(string="Rent Days")
+    rental_value = fields.Float(string="Rental value")
     subtotal = fields.Float(string="Subtotal", compute="get_subtotal")
     tax_ids = fields.Many2many(comodel_name='account.tax', string="Taxes")
     amount_tax = fields.Float(compute="get_subtotal", store=True)
+    sale_order_line_ids = fields.Many2many(comodel_name="sale.order.line")
+    account_move_line_ids = fields.Many2many(comodel_name="account.move.line")
 
     @api.depends('car_numbers', 'rental_value')
     def get_subtotal(self):
@@ -43,12 +46,10 @@ class AnalyticGroup(models.Model):
 
     def unlink(self):
         for rec in self:
-            if rec.sales_order_id:
-                rec.sales_order_id.order_line.filtered(
-                    lambda l: l.groups_analytic_id == rec.groups_analytic_id).unlink()
-            elif rec.account_move_id:
-                rec.account_move_id.invoice_line_ids.filtered(
-                    lambda l: l.groups_analytic_id == rec.groups_analytic_id).unlink()
+            if rec.sale_order_line_ids:
+                rec.sale_order_line_ids.unlink()
+            elif rec.account_move_line_ids:
+                rec.account_move_line_ids.unlink()
         return super(AnalyticGroup, self).unlink()
 
 
@@ -83,19 +84,27 @@ class AccountMoveInherit(models.Model):
     def get_analytic_group_lines(self):
         for rec in self:
             rec.analytic_group_ids = False
-            rec.analytic_group_ids = [(0, 0, {
-                'groups_analytic_id': line.id,
-                'car_numbers': sum(
-                    list(rec.invoice_line_ids.filtered(lambda l: l.groups_analytic_id == line).mapped('quantity'))),
-                'days': sum(list(rec.invoice_line_ids.filtered(lambda l: l.groups_analytic_id == line).mapped('days'))),
-                'tax_ids': rec.invoice_line_ids.filtered(lambda l: l.groups_analytic_id == line).mapped('tax_ids').ids,
-            }) for line in set(rec.invoice_line_ids.mapped('groups_analytic_id'))]
+            for group in set(rec.invoice_line_ids.mapped('groups_analytic_id')):
+                for rental_value in set(rec.invoice_line_ids.filtered(lambda l: l.groups_analytic_id == group).mapped('rent_amount')):
+                    for rent_days in set(rec.invoice_line_ids.filtered(lambda l: l.groups_analytic_id == group and l.rent_amount == rental_value).mapped('rent_days')):
+                        liens = rec.invoice_line_ids.filtered(lambda l: l.groups_analytic_id == group and l.rent_amount == rental_value and l.rent_days == rent_days)
+                        if liens:
+                            rec.analytic_group_ids = [(0, 0, {
+                                'groups_analytic_id': group.id,
+                                'rental_value': liens[0].price_unit,
+                                'rent_days': rent_days,
+                                'car_numbers': sum(list(liens.mapped('quantity'))),
+                                'account_move_line_ids': liens.ids,
+                                # 'tax_ids': rec.invoice_line_ids.filtered(lambda l: l.groups_analytic_id == line).mapped('tax_ids').ids,
+                            })]
 
 
 class AccountMoveLineInherit(models.Model):
     _inherit = 'account.move.line'
 
     groups_analytic_id = fields.Many2one(related="analytic_account_id.group_id", store=True)
+    rent_amount = fields.Float(string="Rent Amount")
+    rent_days = fields.Integer(string="Rent Days", default=30)
 
     @api.constrains('analytic_account_id', 'quantity', 'days')
     def analytic_account_constrains(self):
@@ -113,11 +122,18 @@ class SaleOrderInherit(models.Model):
     def get_analytic_group_lines(self):
         for rec in self:
             rec.analytic_group_ids = False
-            rec.analytic_group_ids = [(0, 0, {
-                'groups_analytic_id': line.id,
-                'car_numbers': sum(
-                    list(rec.order_line.filtered(lambda l: l.groups_analytic_id == line).mapped('product_uom_qty'))),
-            }) for line in set(rec.order_line.mapped('groups_analytic_id'))]
+            for group in set(rec.order_line.mapped('groups_analytic_id')):
+                for rental_value in set(rec.order_line.filtered(lambda l: l.groups_analytic_id == group).mapped('rent_amount')):
+                    for rent_days in set(rec.order_line.filtered(lambda l: l.groups_analytic_id == group and l.rent_amount == rental_value).mapped('rent_days')):
+                        liens = rec.order_line.filtered(lambda l: l.groups_analytic_id == group and l.rent_amount == rental_value and l.rent_days == rent_days)
+                        if liens:
+                            rec.analytic_group_ids = [(0, 0, {
+                                'groups_analytic_id': group.id,
+                                'rental_value': liens[0].price_unit,
+                                'rent_days': rent_days,
+                                'car_numbers': sum(list(liens.mapped('product_uom_qty'))),
+                                'sale_order_line_ids': liens.ids,
+                            })]
 
     def create_contract_car(self):
         for rec in self:
@@ -156,6 +172,8 @@ class SaleOrderLineInherit(models.Model):
     plate_no = fields.Char(string="Plate No", required=False, )
     model_number = fields.Char(string="Model Number", required=False, )
     license_date = fields.Date(string="License Date", required=False, )
+    rent_amount = fields.Float(string="Rent Amount")
+    rent_days = fields.Integer(string="Rent Days", default=30)
     groups_analytic_id = fields.Many2one(related="analytic_account_id.group_id", store=True)
 
     @api.constrains('analytic_account_id', 'product_uom_qty')
@@ -171,15 +189,17 @@ class SaleOrderLineInherit(models.Model):
             rec.plate_no = rec.analytic_account_id.plate_no
             rec.model_number = rec.analytic_account_id.model_number
             rec.license_date = rec.analytic_account_id.license_date
+            rec.rent_amount = rec.analytic_account_id.rent_amount
 
-    @api.onchange('product_uom', 'product_uom_qty', 'analytic_account_id')
+    @api.onchange('product_uom', 'product_uom_qty', 'analytic_account_id', 'rent_amount', 'rent_days')
     def product_uom_change(self):
         res = super(SaleOrderLineInherit, self).product_uom_change()
-        self.price_unit = self.analytic_account_id.rent_amount
-
+        self.price_unit = self.rent_amount * (self.rent_days / 30) * self.product_uom_qty
         return res
 
     def _prepare_invoice_line(self, **optional_values):
         invoice_line = super(SaleOrderLineInherit, self)._prepare_invoice_line(**optional_values)
         invoice_line['analytic_account_id'] = self.analytic_account_id.id
+        invoice_line['rent_amount'] = self.rent_amount
+        invoice_line['rent_days'] = self.rent_days
         return invoice_line
