@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-from dateutil.relativedelta import relativedelta
-
 from odoo import models, fields, api
+from datetime import datetime
 
 
 class AccountAnalyticGroupInherit(models.Model):
@@ -42,7 +41,8 @@ class AnalyticGroup(models.Model):
     def get_subtotal(self):
         for rec in self:
             rec.subtotal = rec.car_numbers * rec.rental_value
-            rec.amount_tax = [tax.amount * rec.subtotal / 100 for tax in rec.tax_ids]
+            for tax in rec.tax_ids:
+                rec.amount_tax = tax.amount * rec.subtotal / 100
 
     def unlink(self):
         for rec in self:
@@ -50,6 +50,7 @@ class AnalyticGroup(models.Model):
                 rec.sale_order_line_ids.unlink()
             elif rec.account_move_line_ids:
                 rec.account_move_line_ids.unlink()
+                rec.account_move_id._onchange_invoice_line_ids()
         return super(AnalyticGroup, self).unlink()
 
 
@@ -61,12 +62,20 @@ class AccountMoveInherit(models.Model):
     amount_tax_customize = fields.Float(string="Total", compute="get_total_with_tax", store=True)
     total_subtotal_with = fields.Float(string="Total With Tax", compute="get_total_with_tax", store=True)
     amount_to_text_customize = fields.Char(string="", required=False, compute="get_amount_to_text")
-    rental_period = fields.Date(compute="get_rental_period")
+    rental_period = fields.Date()
+    count_days = fields.Char(compute="get_count_days")
+    date_start = fields.Date(string='Start Date')
+    date = fields.Date(string='Expiration Date', index=True, tracking=True)
 
-    @api.depends('invoice_date')
-    def get_rental_period(self):
+    @api.depends('date_start', 'date')
+    def get_count_days(self):
         for rec in self:
-            rec.rental_period = rec.invoice_date + relativedelta(days=30) if rec.invoice_date else False
+            if rec.date_start and rec.date:
+                d1 = datetime.strptime(str(rec.date_start), "%Y-%m-%d")
+                d2 = datetime.strptime(str(rec.date), "%Y-%m-%d")
+                rec.count_days = str(abs((d2 - d1).days))
+            else:
+                rec.count_days = ''
 
     @api.depends('total_subtotal_with')
     def get_amount_to_text(self):
@@ -85,9 +94,13 @@ class AccountMoveInherit(models.Model):
         for rec in self:
             rec.analytic_group_ids = False
             for group in set(rec.invoice_line_ids.mapped('groups_analytic_id')):
-                for rental_value in set(rec.invoice_line_ids.filtered(lambda l: l.groups_analytic_id == group).mapped('rent_amount')):
-                    for rent_days in set(rec.invoice_line_ids.filtered(lambda l: l.groups_analytic_id == group and l.rent_amount == rental_value).mapped('rent_days')):
-                        liens = rec.invoice_line_ids.filtered(lambda l: l.groups_analytic_id == group and l.rent_amount == rental_value and l.rent_days == rent_days)
+                for rental_value in set(
+                        rec.invoice_line_ids.filtered(lambda l: l.groups_analytic_id == group).mapped('rent_amount')):
+                    for rent_days in set(rec.invoice_line_ids.filtered(
+                            lambda l: l.groups_analytic_id == group and l.rent_amount == rental_value).mapped(
+                            'rent_days')):
+                        liens = rec.invoice_line_ids.filtered(lambda
+                                                                  l: l.groups_analytic_id == group and l.rent_amount == rental_value and l.rent_days == rent_days)
                         if liens:
                             rec.analytic_group_ids = [(0, 0, {
                                 'groups_analytic_id': group.id,
@@ -95,7 +108,7 @@ class AccountMoveInherit(models.Model):
                                 'rent_days': rent_days,
                                 'car_numbers': sum(list(liens.mapped('quantity'))),
                                 'account_move_line_ids': liens.ids,
-                                # 'tax_ids': rec.invoice_line_ids.filtered(lambda l: l.groups_analytic_id == line).mapped('tax_ids').ids,
+                                'tax_ids': liens[0].tax_ids.ids,
                             })]
 
 
@@ -123,9 +136,13 @@ class SaleOrderInherit(models.Model):
         for rec in self:
             rec.analytic_group_ids = False
             for group in set(rec.order_line.mapped('groups_analytic_id')):
-                for rental_value in set(rec.order_line.filtered(lambda l: l.groups_analytic_id == group).mapped('rent_amount')):
-                    for rent_days in set(rec.order_line.filtered(lambda l: l.groups_analytic_id == group and l.rent_amount == rental_value).mapped('rent_days')):
-                        liens = rec.order_line.filtered(lambda l: l.groups_analytic_id == group and l.rent_amount == rental_value and l.rent_days == rent_days)
+                for rental_value in set(
+                        rec.order_line.filtered(lambda l: l.groups_analytic_id == group).mapped('rent_amount')):
+                    for rent_days in set(rec.order_line.filtered(
+                            lambda l: l.groups_analytic_id == group and l.rent_amount == rental_value).mapped(
+                            'rent_days')):
+                        liens = rec.order_line.filtered(lambda
+                                                            l: l.groups_analytic_id == group and l.rent_amount == rental_value and l.rent_days == rent_days)
                         if liens:
                             rec.analytic_group_ids = [(0, 0, {
                                 'groups_analytic_id': group.id,

@@ -71,8 +71,18 @@
             <field name="model">account.move</field>
             <field name="inherit_id" ref="account.view_move_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='invoice_date']" position="after">
-                    <field name="rental_period" invisible="1"/>
+                <xpath expr="//div[@name='journal_div']" position="after">
+                    <label for="date_start" string="Dates"/>
+                    <div name="dates" class="o_row">
+                        <field name="date_start" widget="daterange"
+                               options="{&quot;related_end_date&quot;: &quot;date&quot;}"/>
+                        <i class="fa fa-long-arrow-right mx-2 oe_edit_only" aria-label="Arrow icon" title="Arrow"/>
+                        <i class="fa fa-long-arrow-right mx-2 oe_read_only" aria-label="Arrow icon" title="Arrow"
+                           attrs="{'invisible': [('date_start', '=', False), ('date', '=', False)]}"/>
+                        <field name="date" widget="daterange"
+                               options="{&quot;related_start_date&quot;: &quot;date_start&quot;}"/>
+                    </div>
+                    <field name="count_days" invisible="0" string="Number Days"/>
                 </xpath>
                 <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']" position="before">
                     <field name="rent_amount"/>
@@ -86,7 +96,7 @@
                                 <field name="car_numbers" readonly="1"/>
                                 <field name="rent_days" readonly="1"/>
                                 <field name="rental_value" readonly="1"/>
-                                <field name="tax_ids" readonly="1"/>
+                                <field name="tax_ids" widget="many2many_tags" readonly="1"/>
                                 <field name="subtotal" readonly="1"/>
                             </tree>
                         </field>
