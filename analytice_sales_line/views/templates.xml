@@ -37,7 +37,7 @@
                             </tr>
                             <tr>
                                 <td width="70%" class="text-right">
-                                    <span t-field="o.rental_period"/>
+                                    <span t-field="o.date"/>من<span t-field="o.date_start"/>الى <br/>(<span t-field="o.count_days"/>)
                                 </td>
                                 <td width="30%" class="text-center">: مدة الايجار</td>
                             </tr>
@@ -55,16 +55,16 @@
                                 <t t-foreach="o.analytic_group_ids" t-as="line">
                                     <tr style="border: 1pt solid black;">
                                         <td class="text-center" style="border: 1pt solid black;">
-                                            <span t-field="line.rental_value"/>
+                                            <span t-field="line.subtotal"/>
                                         </td>
                                         <td class="text-center" style="border: 1pt solid black;">
                                             <span t-field="line.groups_analytic_id.name"/>
                                         </td>
                                         <td class="text-center" style="border: 1pt solid black;">
-                                            <span t-field="line.days"/>
+                                            <span t-field="line.rent_days"/>
                                         </td>
                                         <td class="text-center" style="border: 1pt solid black;">
-                                            <span t-field="line.subtotal"/>
+                                            <span t-field="line.rental_value"/>
                                         </td>
                                         <td class="text-center" style="border: 1pt solid black;">
                                             <span t-field="line.car_numbers"/>
