@@ -81,7 +81,7 @@
                                 </tr>
                                 <tr>
                                     <td class="text-center" style="border: 1pt solid black;">
-                                        <span t-field="o.amount_tax_customize"/>
+                                        <span t-field="o.amount_tax"/>
                                     </td>
                                     <td colspan="4" class="text-right" style="border: 1pt solid black;">
                                           %ضريبة القيمة المضافة 14
