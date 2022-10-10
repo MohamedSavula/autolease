@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api
 from datetime import datetime
+from odoo.exceptions import UserError
 
 
 class AccountAnalyticGroupInherit(models.Model):
@@ -18,6 +19,12 @@ class AccountAnalyticAccountInherit(models.Model):
     model_number = fields.Char(string="Model Number", required=False, )
     rent_amount = fields.Float(string="Rent Amount")
     license_date = fields.Date(string="License Date", required=False, )
+
+    @api.constrains('name')
+    def unique_internal_reference(self):
+        for rec in self:
+            if self.search_count([('name', '=', rec.name), ('name', '!=', False)]) > 1:
+                raise UserError("Analytic account is Duplicated")
 
 
 class AnalyticGroup(models.Model):
@@ -45,17 +52,14 @@ class AnalyticGroup(models.Model):
                 rec.amount_tax = tax.amount * rec.subtotal / 100
 
     def unlink(self):
-        for rec in self:
-            account_move_id = rec.account_move_id
-            if rec.sale_order_line_ids:
-                rec.sale_order_line_ids.unlink()
-                res = super(AnalyticGroup, self).unlink()
-            elif rec.account_move_line_ids:
-                rec.account_move_line_ids.unlink()
-                res = super(AnalyticGroup, self).unlink()
-                account_move_id._onchange_invoice_line_ids()
-                account_move_id._recompute_tax_lines()
-        return res
+        account_move_id = self.account_move_id
+        if self.sale_order_line_ids:
+            self.sale_order_line_ids.unlink()
+        elif self.account_move_line_ids:
+            self.account_move_line_ids.unlink()
+            account_move_id._onchange_invoice_line_ids()
+            account_move_id._recompute_tax_lines()
+        return super(AnalyticGroup, self).unlink()
 
 
 class AccountMoveInherit(models.Model):
