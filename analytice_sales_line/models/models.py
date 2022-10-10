@@ -46,12 +46,16 @@ class AnalyticGroup(models.Model):
 
     def unlink(self):
         for rec in self:
+            account_move_id = rec.account_move_id
             if rec.sale_order_line_ids:
                 rec.sale_order_line_ids.unlink()
+                res = super(AnalyticGroup, self).unlink()
             elif rec.account_move_line_ids:
                 rec.account_move_line_ids.unlink()
-                rec.account_move_id._onchange_invoice_line_ids()
-        return super(AnalyticGroup, self).unlink()
+                res = super(AnalyticGroup, self).unlink()
+                account_move_id._onchange_invoice_line_ids()
+                account_move_id._recompute_tax_lines()
+        return res
 
 
 class AccountMoveInherit(models.Model):
@@ -98,7 +102,7 @@ class AccountMoveInherit(models.Model):
                         rec.invoice_line_ids.filtered(lambda l: l.groups_analytic_id == group).mapped('rent_amount')):
                     for rent_days in set(rec.invoice_line_ids.filtered(
                             lambda l: l.groups_analytic_id == group and l.rent_amount == rental_value).mapped(
-                            'rent_days')):
+                        'rent_days')):
                         liens = rec.invoice_line_ids.filtered(lambda
                                                                   l: l.groups_analytic_id == group and l.rent_amount == rental_value and l.rent_days == rent_days)
                         if liens:
@@ -140,7 +144,7 @@ class SaleOrderInherit(models.Model):
                         rec.order_line.filtered(lambda l: l.groups_analytic_id == group).mapped('rent_amount')):
                     for rent_days in set(rec.order_line.filtered(
                             lambda l: l.groups_analytic_id == group and l.rent_amount == rental_value).mapped(
-                            'rent_days')):
+                        'rent_days')):
                         liens = rec.order_line.filtered(lambda
                                                             l: l.groups_analytic_id == group and l.rent_amount == rental_value and l.rent_days == rent_days)
                         if liens:
