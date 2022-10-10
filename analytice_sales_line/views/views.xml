@@ -103,7 +103,7 @@
                         <group col="6">
                             <group class="oe_subtotal_footer oe_right" colspan="2">
                                 <field name="total_subtotal"/>
-<!--                                <field name="amount_tax_customize"/>-->
+                                <field name="amount_tax"/>
                                 <field name="total_subtotal_with"/>
                                 <field name="amount_to_text_customize" invisible="1"/>
                             </group>
