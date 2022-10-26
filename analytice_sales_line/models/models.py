@@ -47,7 +47,7 @@ class AnalyticGroup(models.Model):
     @api.depends('car_numbers', 'rental_value')
     def get_subtotal(self):
         for rec in self:
-            rec.subtotal = rec.car_numbers * rec.rental_value
+            rec.subtotal = rec.rental_value * (rec.rent_days / 30) * rec.car_numbers
             for tax in rec.tax_ids:
                 rec.amount_tax = tax.amount * rec.subtotal / 100
 
@@ -112,7 +112,7 @@ class AccountMoveInherit(models.Model):
                         if liens:
                             rec.analytic_group_ids = [(0, 0, {
                                 'groups_analytic_id': group.id,
-                                'rental_value': liens[0].price_unit,
+                                'rental_value': liens[0].rent_amount,
                                 'rent_days': rent_days,
                                 'car_numbers': sum(list(liens.mapped('quantity'))),
                                 'account_move_line_ids': liens.ids,
@@ -127,7 +127,7 @@ class AccountMoveLineInherit(models.Model):
     rent_amount = fields.Float(string="Rent Amount")
     rent_days = fields.Integer(string="Rent Days", default=30)
 
-    @api.constrains('analytic_account_id', 'quantity', 'days')
+    @api.constrains('analytic_account_id', 'quantity', 'days', 'rent_amount', 'rent_days')
     def analytic_account_constrains(self):
         for rec in self:
             rec.move_id.get_analytic_group_lines()
@@ -154,7 +154,7 @@ class SaleOrderInherit(models.Model):
                         if liens:
                             rec.analytic_group_ids = [(0, 0, {
                                 'groups_analytic_id': group.id,
-                                'rental_value': liens[0].price_unit,
+                                'rental_value': liens[0].rent_amount,
                                 'rent_days': rent_days,
                                 'car_numbers': sum(list(liens.mapped('product_uom_qty'))),
                                 'sale_order_line_ids': liens.ids,
@@ -187,6 +187,12 @@ class SaleOrderInherit(models.Model):
                 'domain': [('id', 'in', rec.contract_car_ids.ids)],
             }
 
+    def action_confirm(self):
+        date = self.date_order
+        res = super(SaleOrderInherit, self).action_confirm()
+        self.date_order = date
+        return res
+
 
 class SaleOrderLineInherit(models.Model):
     _inherit = 'sale.order.line'
@@ -201,7 +207,7 @@ class SaleOrderLineInherit(models.Model):
     rent_days = fields.Integer(string="Rent Days", default=30)
     groups_analytic_id = fields.Many2one(related="analytic_account_id.group_id", store=True)
 
-    @api.constrains('analytic_account_id', 'product_uom_qty')
+    @api.constrains('analytic_account_id', 'product_uom_qty', 'rent_days', 'rent_amount')
     def analytic_account_constrains(self):
         for rec in self:
             rec.order_id.get_analytic_group_lines()
