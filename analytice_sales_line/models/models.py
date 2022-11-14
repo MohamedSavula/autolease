@@ -88,8 +88,8 @@ class AccountMoveInherit(models.Model):
     @api.depends('total_subtotal_with')
     def get_amount_to_text(self):
         for rec in self:
-            rec.amount_to_text_customize = rec.currency_id.amount_to_text(rec.total_subtotal_with).replace('and',
-                                                                                                           'و') + " فقط لا غير"
+            rec.amount_to_text_customize = rec.currency_id.amount_to_text(rec.total_subtotal_with)
+                                               # .replace('and', 'و') + " فقط لا غير"
 
     @api.depends('analytic_group_ids')
     def get_total_with_tax(self):
