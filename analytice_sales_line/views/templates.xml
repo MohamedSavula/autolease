@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="id_template_invoice_customize">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <t t-foreach="docs" t-as="o">
+                        <div class="header">
+                            <div class="col-6">
+                                <img class="col-6" t-if="o.company_id.logo"
+                                     t-att-src="image_data_uri(o.company_id.logo)"
+                                     alt="Logo1"
+                                     />
+                            </div>
+                        </div>
+                        <center>
+                            <span t-field="o.name"/>فاتورة رقم
+                        </center>
+                        <br/>
+                        <table width="100%">
+                            <tr>
+                                <td width="70%" class="text-right">
+                                    <span t-field="o.invoice_date"/>
+                                </td>
+                                <td width="30%" class="text-center">: التاريخ</td>
+                            </tr>
+                            <tr>
+                                <td width="70%" class="text-right">
+                                    <span t-if="o.invoice_line_ids" t-field="o.invoice_line_ids[0].name"/>
+                                </td>
+                                <td width="30%" class="text-center">: نوع السيارة</td>
+                            </tr>
+                            <tr>
+                                <td width="70%" class="text-right">
+                                    <span t-field="o.partner_id.name"/>
+                                </td>
+                                <td width="30%" class="text-center">: اسم العميل</td>
+                            </tr>
+                            <tr>
+                                <td width="70%" class="text-right">
+                                    <span t-field="o.date"/>من<span t-field="o.date_start"/>الى <br/>(<span t-field="o.count_days"/>)
+                                </td>
+                                <td width="30%" class="text-center">: مدة الايجار</td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table width="100%">
+                            <thead>
+                                <th class="text-center" width="15%" style="border: 1pt solid black;">القيمة</th>
+                                <th class="text-center" width="55%" style="border: 1pt solid black;">الوصف</th>
+                                <th class="text-center" width="15%" style="border: 1pt solid black;">المدة باليوم</th>
+                                <th class="text-center" width="15%" style="border: 1pt solid black;">القيمة الايجارية</th>
+                                <th class="text-center" width="15%" style="border: 1pt solid black;">عدد السيارات</th>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.analytic_group_ids" t-as="line">
+                                    <tr style="border: 1pt solid black;">
+                                        <td class="text-center" style="border: 1pt solid black;">
+                                            <span t-field="line.subtotal"/>
+                                        </td>
+                                        <td class="text-center" style="border: 1pt solid black;">
+                                            <span t-field="line.groups_analytic_id.name"/>
+                                        </td>
+                                        <td class="text-center" style="border: 1pt solid black;">
+                                            <span t-field="line.rent_days"/>
+                                        </td>
+                                        <td class="text-center" style="border: 1pt solid black;">
+                                            <span t-field="line.rental_value"/>
+                                        </td>
+                                        <td class="text-center" style="border: 1pt solid black;">
+                                            <span t-field="line.car_numbers"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <td class="text-center" style="border: 1pt solid black;">
+                                        <span t-field="o.total_subtotal"/>
+                                    </td>
+                                    <td colspan="4" class="text-right" style="border: 1pt solid black;">
+                                        القيمة قبل الضريبة
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center" style="border: 1pt solid black;">
+                                        <span t-field="o.amount_tax"/>
+                                    </td>
+                                    <td colspan="4" class="text-right" style="border: 1pt solid black;">
+                                          %ضريبة القيمة المضافة 14
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center" style="border: 1pt solid black;">
+                                        <span t-field="o.total_subtotal_with"/>
+                                    </td>
+                                    <td colspan="2" class="text-right" style="border: 1pt solid black;">
+                                        <span t-field="o.amount_to_text_customize"/>
+                                    </td>
+                                    <td colspan="2" class="text-center" style="border: 1pt solid black;">
+                                        الاجمالى
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <table width="100%">
+                            <tr>
+                                <td width="70%"/>
+                                <td width="30%" class="text-center">التوقيع</td>
+                            </tr>
+                        </table>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,828 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="id_template_contract_car">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <t t-foreach="docs" t-as="o">
+                        <br/>
+                        <br/>
+                        <div style="border: 1px solid #dee2e6">
+                            <table width="100%">
+                                <tr>
+                                    <td width="33%" class="font-weight-bold text-center" style="font-size: 27px;">
+                                        Autolease
+                                        Company
+                                    </td>
+                                    <td width="33%"/>
+                                    <td width="33%" class="font-weight-bold text-center" style="font-size: 35px;">شركة
+                                        أوتوليز
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center" style="font-size: 13px;">2040 Al Miraag City-Maadi-Cairo
+                                    </td>
+                                    <td style="font-size: 17px;" class="font-weight-bold text-center">NS (<span
+                                            t-field="o.sale_order_id.name"/>)
+                                    </td>
+                                    <td class="text-center" style="font-size: 13px;">٢٠٤٠ مدينة
+                                        المعراج-المعادى-القاهرة
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center" style="font-size: 13px;">Tel :- (202)25177410 -
+                                        (202)25177481
+                                    </td>
+                                    <td/>
+                                    <td class="text-center" style="font-size: 13px;">تليفون : ٢٥١٧٧٤١٠ (٢٠٢) - ٢٥١٧٧٤٨١
+                                        (٢٠٢)
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <div class="row col-12">
+                                <table class="table-bordered" style="border: 1px solid #000000; font-size: 9px;"
+                                       width="35%">
+                                    <tr>
+                                        <td width="15%" class="text-center">Name</td>
+                                        <td width="70%" class="text-center">
+                                            <span t-field="o.partner_id.name"/>
+                                        </td>
+                                        <td width="15%" class="text-center">الاسم</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="15%" class="text-center">Job</td>
+                                        <td width="70%">
+                                            <!--                                        <span t-field="o.partner_id.name"/>-->
+                                        </td>
+                                        <td width="15%" class="text-center">الوظيفة</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="18%" class="text-left" style="font-size: 7px;">Home Address</td>
+                                        <td width="67%">
+                                            <span t-field="o.street"/>/<span t-field="o.street2"/>/<span
+                                                t-field="o.city"/>/
+                                            <span t-field="o.city"/>/<span t-field="o.state_id.name"/>/<span
+                                                t-field="o.zip"/>/
+                                            <span t-field="o.country_id.name"/>
+                                        </td>
+                                        <td width="15%" class="text-center">العنوان</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="15%" class="text-center">Phone</td>
+                                        <td class="text-center" width="70%">
+                                            <span t-field="o.phone"/>
+                                        </td>
+                                        <td width="15%" class="text-center">التليفون</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="15%" class="text-center">Mobile</td>
+                                        <td class="text-center" width="70%">
+                                            <span t-field="o.mobile"/>
+                                        </td>
+                                        <td width="15%" class="text-center">محمول</td>
+                                    </tr>
+                                </table>
+                                <table class="table-bordered" style="border: 1px solid #000000; font-size: 9px;"
+                                       width="30%">
+                                    <tr>
+                                        <td width="25%" class="text-center">KMSIN</td>
+                                        <td width="50%" class="text-center">
+                                            <span t-field="o.kms_in"/>
+                                        </td>
+                                        <td width="25%" class="text-center">ك م دخول</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="25%" class="text-center">Plate No</td>
+                                        <td width="50%" class="text-center">
+                                            <span t-field="o.plate_no"/>
+                                        </td>
+                                        <td width="25%" class="text-center">رقم اللوحة</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="25%" class="text-center">KMSOUT</td>
+                                        <td width="50%" class="text-center">
+                                            <span t-field="o.kos_out"/>
+                                        </td>
+                                        <td width="25%" class="text-center">ك م خروج</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="25%" class="text-center">Model No</td>
+                                        <td width="50%" class="text-center">
+                                            <span t-field="o.model_no"/>
+                                        </td>
+                                        <td width="25%" class="text-center">رقم الموديل</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="25%" class="text-center">KMS Driven</td>
+                                        <td width="50%" class="text-center">
+                                            <span t-field="o.kms_driven"/>
+                                        </td>
+                                        <td width="25%" class="text-center">ك م مستخدم</td>
+                                    </tr>
+                                </table>
+                                <table class="table-bordered" style="border: 1px solid #000000; font-size: 9px;"
+                                       width="35%">
+                                    <tr>
+                                        <td width="30%" class="text-center" style="font-size: 11px;" colspan="3">only
+                                            valid a lax invoice when
+                                            charges paid<br/>in cash to Autolease Co.immediately
+                                            <br/>
+                                            al end of rental
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td width="30%" class="text-center">Date and time in</td>
+                                        <td width="40%" class="text-center">
+                                            <span t-field="o.date_car_in"/>
+                                        </td>
+                                        <td width="30%" class="text-right">تاريخ العودة والساعة</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="30%" class="text-center">Date and time out</td>
+                                        <td width="40%" class="text-center">
+                                            <span t-field="o.date_car_out"/>
+                                        </td>
+                                        <td width="30%" class="text-right" style="font-size: 8px;">تاريخ الخروج
+                                            والساعة
+                                        </td>
+                                    </tr>
+                                    <!--                                <tr>-->
+                                    <!--                                    <td width="30%" class="text-center">Date and time out</td>-->
+                                    <!--                                    <td width="40%" class="text-center">-->
+                                    <!--                                        <span t-field="o.date_car_out"/>-->
+                                    <!--                                    </td>-->
+                                    <!--                                    <td width="30%" class="text-right" style="font-size: 8px;">تاريخ الخروج والساعة</td>-->
+                                    <!--                                </tr>-->
+                                </table>
+                            </div>
+                            <br/>
+                            <div class="row col-12">
+                                <table class="table-bordered" style="border: 1px solid #000000; font-size: 9px;"
+                                       width="35%">
+                                    <tr>
+                                        <td width="50%" class="text-center">licance NO<br/>رقم رخصة القيادة
+                                            <br/>
+                                            <span t-field="o.driving_license_number"/>
+                                        </td>
+                                        <td width="50%" class="text-center">Date of issuse<br/>تاريخ الاصدار
+                                            <br/>
+                                            <span t-field="o.release_date"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="50%" class="text-center">Issuse by<br/>صادر من
+                                            <br/>
+                                            <span t-field="o.issued_by"/>
+                                        </td>
+                                        <td width="50%" class="text-center">Expiry Date<br/>تاريخ الانهاء
+                                            <br/>
+                                            <span t-field="o.expiry_date"/>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td width="50%" class="text-center">Date of Birth<br/>تاريخ الميلاد
+                                            <br/>
+                                            <span t-field="o.date_of_birth"/>
+                                        </td>
+                                        <td width="50%" class="text-center">Nationalty<br/>الجنسيه
+                                            <br/>
+                                            <span t-field="o.country_customize_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="50%" class="text-center">passport<br/>رقم جواز السفر\البطاقة
+                                            <br/>
+                                            <span t-field="o.passport"/>
+                                        </td>
+                                        <td width="50%" class="text-center">Date of Issue<br/>تاريخ الاصدار
+                                            <br/>
+                                            <span t-field="o.date_of_issue"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left" colspan="2">
+                                            <span>Number of Days &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</span>
+                                            <span t-field="o.number_of_days"/>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;;&#160;&#160;&#160;&#160;<span>
+                                            عدد الايام
+                                        </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left" colspan="2">Driver &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                            <span t-field="o.driver_id.name"/>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;;&#160;&#160;&#160;&#160;السائق
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left" colspan="2">Additional Driver&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                            <span t-field="o.additional_driver_id.name"/>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                            السائق الاضافي
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 10px;">
+                                            Rentar accepts or dechies to pay the additional charge to walve responsibly
+                                            for
+                                            loss or damage vehicle subjec to the terms and coeditions of the rental
+                                            agreement Internation
+                                        </td>
+                                        <td>
+                                            <table width="100%">
+                                                <tr>
+                                                    <td class="text-center" colspan="2">CDW Rate</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center">Accept
+                                                        <br/>
+                                                        .....
+                                                    </td>
+                                                    <td class="text-center">Decline
+                                                        <br/>
+                                                        ...........
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 10px;">
+                                            Renter accepts or deciles personal insurance or condense with the terms of
+                                            the
+                                            Autolease Co. insurance leaflet
+                                        </td>
+                                        <td>
+                                            <table width="100%">
+                                                <tr>
+                                                    <td class="text-center" colspan="2">التأمين علي السيارة</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-center">Accept
+                                                        <br/>
+                                                        .....
+                                                    </td>
+                                                    <td class="text-center">Decline
+                                                        <br/>
+                                                        ...........
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center" colspan="2">Cash()&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Charge()&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Voucher()</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left" colspan="2">Voucher No&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                            <span t-field="o.voucher_no"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left" colspan="2">Voucher Value&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                            <span t-field="o.voucher_value"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left" colspan="2">Credit Card No&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                            <span t-field="o.credit_card_no"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left" colspan="2">Type&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                            <span t-field="o.type"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left" colspan="2">Approval No&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                            <span t-field="o.approval_no"/>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Explry
+                                            &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span
+                                                    t-field="o.voucher_expiry"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center" style="font-size: 10px;" colspan="2">I have read and
+                                            agree to the Autolease Co.
+                                            standard terms and conditions of rental and warant that the above detalls
+                                            are
+                                            correct In case of lossing or withdrawal the car licence you charge 100$
+                                            <br/>في حالة فقد أو سحب رخصة السيارة وتعمل العميل دفع مبلغ مائة دولار امریکی
+                                            في
+                                            حالة فقد أو سحب اللوحات المعدنية بتحمل الحمول دفع مبلغ ثلاث مائة دولار
+                                            أمريكي
+                                            <br/>in Case of Lossing the Plate you charge 300$
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center" colspan="2">Full Name ----------------------------------
+                                            الاسم بالكامل
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center" colspan="2">Signature ----------------------------------
+                                            التوقيع
+                                        </td>
+                                    </tr>
+
+                                </table>
+                                <table class="table-bordered" style="border: 1px solid #000000; font-size: 9px;"
+                                       width="30%">
+                                    <tr class="table-bordered">
+                                        <td width="10" class="text-center">KMS ALLOWED</td>
+                                        <td width="45" class="text-center">
+                                            <span t-field="o.kms_allowed"/>
+                                        </td>
+                                        <td width="45" class="text-center">ك.م مسموح</td>
+                                    </tr>
+                                    <tr class="table-bordered">
+                                        <td width="10" class="text-center">EX KMS</td>
+                                        <td width="45" class="text-center">
+                                            <span t-field="o.ex_kms"/>
+                                        </td>
+                                        <td width="45" class="text-center">ك.م زيادة</td>
+                                    </tr>
+                                    <tr class="table-bordered">
+                                        <td width="10" class="text-center">NO</td>
+                                        <td width="45" class="text-center">DEPOSIT</td>
+                                        <td width="45" class="text-center">DATE</td>
+                                    </tr>
+                                    <t t-set="n" t-value="0"/>
+                                    <t t-foreach="o.deposit_ids" t-as="line_d">
+                                        <t t-set="n" t-value="n+1"/>
+                                        <tr class="table-bordered">
+                                            <td width="10" class="text-center">
+                                                <span t-esc="n"/>
+                                            </td>
+                                            <td width="45" class="text-center">
+                                                <span t-field="line_d.deposit"/>
+                                            </td>
+                                            <td width="45" class="text-center">
+                                                <span t-field="line_d.deposit_date"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <tr>
+                                        <td colspan="3">RES.NO</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">Gas In &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span
+                                                t-field="o.gas_in"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">Gas Out&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span
+                                                t-field="o.gas_out"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table class="table-bordered" style="border: 1px solid #000000; font-size: 9px;"
+                                       width="35%">
+                                    <tr class="table-bordered">
+                                        <td class="text-center" width="25%">Days</td>
+                                        <td class="text-center" width="25%">
+                                            <span t-field="o.car_days"/>
+                                        </td>
+                                        <td class="text-center" colspan="2"></td>
+                                    </tr>
+                                    <tr class="table-bordered">
+                                        <td class="text-center" width="25%">EXHOURS</td>
+                                        <td class="text-center" width="25%">
+                                            <span t-field="o.car_hours"/>
+                                        </td>
+                                        <td class="text-center" colspan="2"></td>
+                                    </tr>
+                                    <tr class="table-bordered">
+                                        <td class="text-center" width="25%">WEEKS AT</td>
+                                        <td class="text-center" width="25%">
+                                            <span t-field="o.car_weeks"/>
+                                        </td>
+                                        <td class="text-center" colspan="2"></td>
+                                    </tr>
+                                    <tr class="table-bordered">
+                                        <td class="text-center" width="25%">EX.KM</td>
+                                        <td class="text-center" width="25%">
+                                            <span t-field="o.ex_km"/>
+                                        </td>
+                                        <td class="text-center" colspan="2"></td>
+                                    </tr>
+                                    <tr class="table-bordered">
+                                        <td class="text-center" colspan="2">Subtotal المبلغ الاجمالي</td>
+                                        <td class="text-center" colspan="2">
+                                            <span t-field="o.subtotal"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-bordered">
+                                        <td class="text-center" colspan="2">Discount % ناقص</td>
+                                        <td class="text-center" colspan="2">
+                                            <span t-field="o.discount"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-bordered">
+                                        <td class="text-center" colspan="2">Subtotal الصافي</td>
+                                        <td class="text-center" colspan="2">
+                                            <span t-field="o.net"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-bordered">
+                                        <td class="text-center" colspan="2">DELIVERY CHARGE</td>
+                                        <td class="text-center" colspan="2">
+                                            <span t-field="o.delivery_charge"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-bordered">
+                                        <td class="text-center" colspan="2">INSPECTION CHARGE</td>
+                                        <td class="text-center" colspan="2">
+                                            <span t-field="o.inspection_charge"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-bordered">
+                                        <td class="text-center" colspan="2">PAI</td>
+                                        <td class="text-center" colspan="2">
+                                            <span t-field="o.pai"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-bordered">
+                                        <td class="text-center" colspan="2">SALES TAX 10%</td>
+                                        <td class="text-center" colspan="2">
+                                            <span t-field="o.sales_tax"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-bordered">
+                                        <td class="text-center" colspan="2">CDW ........</td>
+                                        <td class="text-center" colspan="2">
+                                            <span t-field="o.cdw"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-bordered">
+                                        <td class="text-center" colspan="2">REFUELLING</td>
+                                        <td class="text-center" colspan="2">
+                                            <span t-field="o.refuelling"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-bordered">
+                                        <td class="text-center" colspan="2">SERVICE</td>
+                                        <td class="text-center" colspan="2">
+                                            <span t-field="o.service"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-bordered">
+                                        <td class="text-center" colspan="2">DRIVER PER DAY</td>
+                                        <td class="text-center" colspan="2">
+                                            <span t-field="o.driver_per_day"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-bordered">
+                                        <td class="text-center" colspan="2">ADDITIONAL HOURS</td>
+                                        <td class="text-center" colspan="2">
+                                            <span t-field="o.additional_hours"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-bordered">
+                                        <td class="text-center" colspan="2">Subtotal الصافي</td>
+                                        <td class="text-center" colspan="2">
+                                            <span t-field="o.net_subtotal"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-bordered">
+                                        <td class="text-center" colspan="2">PLUS</td>
+                                        <td class="text-center" colspan="2">
+                                            <span t-field="o.plus"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-bordered">
+                                        <td class="text-center" colspan="2">LESS</td>
+                                        <td class="text-center" colspan="2">
+                                            <span t-field="o.less"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-bordered">
+                                        <td class="text-center" colspan="2">TOTAL CHARGES</td>
+                                        <td class="text-center" colspan="2">
+                                            <span t-field="o.total_charges"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-bordered">
+                                        <td class="text-center" colspan="2">LESS TOTAL DEPOITS</td>
+                                        <td class="text-center" colspan="2">
+                                            <span t-field="o.less_total_deposit"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-bordered">
+                                        <td class="text-center" colspan="2">NET DUE</td>
+                                        <td class="text-center" colspan="2">
+                                            <span t-field="o.net_due"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-bordered">
+                                        <td class="text-center" colspan="2">REFUND</td>
+                                        <td class="text-center" colspan="2">
+                                            <span t-field="o.refund"/>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                            <br/>
+                            <table style="border: 1px solid #dee2e6; font-size: 10px;"
+                                   width="100%">
+                                <tr style="border: 1px solid #dee2e6;">
+                                    <td width="11%">Prepared By</td>
+                                    <td width="11%"></td>
+                                    <td width="11%">أعد بواسظة</td>
+                                    <td width="11%">Finalised By</td>
+                                    <td width="11%"></td>
+                                    <td width="11%">اقفل بواسظة</td>
+                                    <td width="11%">Checker</td>
+                                    <td width="11%"></td>
+                                    <td width="11%">روجع</td>
+                                </tr>
+                                <tr style="border: 1px solid #dee2e6;">
+                                    <td colspan="3" style="font-size: 10px;">PLS Do not make oil changes or maintenance
+                                        boforo
+                                        Contacting Autolease Co. Look behind
+                                    </td>
+                                    <td colspan="3"></td>
+                                    <td colspan="3">الرجاء عدم تغيير الزيت او عمل از اصلاحات قبل الرجوع للشركة</td>
+                                </tr>
+                                <tr style="border: 1px solid #dee2e6;">
+                                    <td colspan="4" class="text-right">امضاء السائق</td>
+                                    <td colspan="5" class="text-right">امضاء العميل</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <table width="100%">
+                            <tr>
+                                <td width="45%" class="text-left"
+                                    style="font-size: 7px; padding-left:15mm; line-height: 11px;">
+                                    Terms and conditions of the rental agreement:
+                                    <br/>
+                                    Autolease Co. rents its cars to persons or any legal entity. The cars’ descriptions
+                                    contained, and
+                                    <br/>
+                                    conditions are set out in the details of this contract. The contract
+                                    is governed between the parties to the following conditions:
+                                    <br/>
+                                    <br/>
+                                    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<u>
+                                    1.Receipt and delivery of the car:
+                                </u>
+                                    <br/>
+                                    <br/>
+                                    Renter acknowledges that he has received the car described in this contact in a good
+                                    condition and undertakes to return the car at the end of the rental period in the
+                                    same condition except for normal usage.<br/>During the rental period, renter is
+                                    legally
+                                    responsible for the vehicle and is considered a trustee for the car.
+                                    <br/>
+                                    <br/>
+                                    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<u>
+                                    2.Rental value and contract renewal:
+                                </u>
+                                    <br/>
+                                    <br/>
+                                    Rental charges are calculated at the commencement of the rental contract according
+                                    to the company current tariff the minimum rental period is one day (24 hours)
+                                    <br/>
+                                    and
+                                    can be paid either by cash or credit cards that is approved by the company, no
+                                    personal cheques are accepted. Payment is at the beginning of rental period. In case
+                                    renter wants to extend the rental contract for another period, he/she must inform
+                                    Autolease Co. before 24 hours as to be considered for his willingness to extend the
+                                    contract for another period. Failure to do this will void the contract and
+                                    accordingly renter will assume full responsibility for all legal fines. Also, and
+                                    additional 5% (five percent)<br/>from rental charges will be added for every day
+                                    being
+                                    late. Renter should obtain a written note from Autolease Co. that he returned the
+                                    car, other than obtaining that note the car will be in this possession.
+                                    <br/>
+                                    <br/>
+                                    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<u>
+                                    3.Maintenance and car service:
+                                </u>
+                                    <br/>
+                                    <br/>
+                                    Renter acknowledges his responsibility for regular check of water, tires, and oil
+                                    level. In case of any sudden malfunction in the car, renter should notify the
+                                    company immediately. He is not allowed to carry any repairs for the car under
+                                    circumstances. Incase renter carries any repairs; the company has the right to claim
+                                    proper compensations and will not pay any invoices for that.
+                                    <br/>
+                                    <br/>
+                                    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<u>
+                                    4.Traffic laws and regulations and public security:
+                                </u>
+                                    <br/>
+                                    <br/>
+                                    Renter acknowledges his responsibility for his own safety of all passengers
+                                    travelling with<br/>him in the car. Also acknowledges that he is fully aware with
+                                    all
+                                    traffic laws and regulations, as well as places and roads that are restricted for
+                                    foreigners as instructed by Ministry of interior in Arab Republic of Egypt.
+                                    <br/>
+                                    <br/>
+                                    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<u>
+                                    5.Insurance:
+                                </u>
+                                    <br/>
+                                    <br/>
+                                    Autolease Co. cars are fully insured for driving inly within the geographical
+                                    boundaries of the Arab Republic of Egypt.
+                                    <br/>
+                                    However, this insurance does not cover
+                                    accidents occurring due to:
+                                    <br/>
+                                    <br/>
+                                    a.Exceeding speed limits on roads.
+                                    <br/>
+                                    b.Driving while drunk or drug abuse.
+                                    <br/>
+                                    c.Using the cars in racing or giving driving lessons.
+                                    <br/>
+                                    d.Weather condition, earthquakes, demonstrations, and strikes.
+                                    <br/>
+                                    e.Towing the car by competent authorities.
+                                    <br/>
+                                    <br/>
+                                    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<u>
+                                    6.Civil and criminal liability:
+                                </u>
+                                    <br/>
+                                    <br/>
+                                    Renter acknowledges that the car in hos criminal and civil responsibility. Also
+                                    acknowledges that the received the car free from any prohibitions or irregularities.
+                                    <br/>
+                                    <br/>
+                                    Renter is the only responsible for the sue of the car in violating laws or illegal
+                                    purposes.
+                                    <br/>
+                                    <br/>
+                                    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<u>
+                                    7.Fire, theft, and accidents:
+                                </u>
+                                    <br/>
+                                    <br/>
+                                    In case of car accidents, fire or theft, renter is responsible to notify the nearest
+                                    police station
+                                    <br/>
+                                    immediately and obtaining a copy of the police report. Also, renter
+                                    must inform Autolease Co.
+                                    <br/>
+                                    employees immediately of what happened, failure to the
+                                    following instructions will cause renter to bear all legal responsibilities
+                                    resulting from that.
+                                    <br/>
+                                    <br/>
+                                    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<u>
+                                    8.Data and documents submitted:
+                                </u>
+                                    <br/>
+                                    <br/>
+                                    Renter acknowledges that all the data and the documents submitted from his side are
+                                    correct and matching of his current status. And undertakes to notify Autolease Co.
+                                    <br/>
+                                    immediately of any changes in these data in future during the renting period.
+                                    <br/>
+                                    Renter
+                                    acknowledges that he is only responsible legally for that.
+                                    <br/>
+                                    <br/>
+                                    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;9.In
+                                    the event of any car accident, fire or theft, the renter would bear a fine
+                                    <br/>
+                                    amounting of 500$ (Five hundred dollars)
+                                    <br/>
+                                    <br/>
+                                    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;10.Renter
+                                    fully responsible for all his personal belongings inside the car and
+                                    Autolease CO. is not responsible for the loss of any these personal belongings
+                                    <br/>
+                                    <br/>
+                                    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<u>
+                                    11.Specialist judicial:
+                                </u>
+                                    <br/>
+                                    <br/>
+                                    In any case of disputes that may arise between the renter and Autolease Co.
+                                    <br/>
+                                    if it is
+                                    not settled peacefully, we might need to resort to competent courts of Arab Republic
+                                    of Egypt, the court decision is bonding to both parties.
+                                    <br/>
+                                    This contract has two
+                                    copies each part has one to act accordingly when needed.
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    Renter Signature
+                                    ....................................................................................................
+                                </td>
+                                <td width="10%"/>
+                                <td width="45%" class="text-right"
+                                    style="font-size: 7px; padding-right:15mm; line-height: 17px;" dir="rtl">
+                                    <u>شروط و أحكام اتفاقيه التاجير :</u>
+                                    <br/>
+                                    تؤجر شركة اوتوليز السياره المملوكه لها و الوارد اوصفها في هذا العقد للاشخاص و اي
+                                    جهات اخري
+                                    <br/>
+                                    وفقا للشروط الوارده تفصيليا بهذا العقد علي ان يكون محكوما بين الطرفين
+                                    <br/>
+                                    بالشروط التاليه :
+                                    <br/>
+                                    <u>1-استلام و تسليم السيارة :</u>
+                                    <br/>
+                                    يقر المستاجر بانه قد استلم السياره موضوع هذا العقد من الشركه بحاله جيدة و يتعهد
+                                    بالمحافظة عليها محافظة علي ماله الخاص و تكون يده عليها يد امانه من وقت استلامها الي
+                                    اعادتها للشركه بنفس الحاله التي استلمها بها عدا الاستهلاك العام
+                                    <br/>
+                                    <br/>
+                                    <u>2-القيمه الايجاريه و تجديد العقد :</u>
+                                    <br/>
+                                    الحد الادني لليجار يوم (24) ساعة و تحصل القيمه الايجاريه حسب تعريفه السعر المقدمة من
+                                    الشركة و في حاله رغبه المستاجر تجديد مدة العقد عليه ان يخطر الشركة بذلك كتابيا قبل
+                                    انتهاء مده التعاقد بيوم و يترتب علي عدم قيام المستاجر بهذا الاخطار بطلان العقد و
+                                    انتهائه فورا و تعتبر يده علي السياره يد غاصب و يتحمل المسؤليه الناجمه عن ذلك و عند
+                                    انتهاء مده الايجار لا تبرا ذمه المستاجر الا بتسليم السياره للموظف التابع للشركه و
+                                    توقيعه م يفيد بذلك و يكون السداد نقدا او ببطاقات الائتمان المصرفيه المعروفه التي
+                                    تعتمدها الشركه و لا تقبل الشيكات الشخصيه و في حاله التاخير عن السداد تحسب غرامه
+                                    تاخير بنسبه (5%) خمسه بالمائه عن المستحق في ذمه المستاجر عن كل يوم
+                                    <br/>
+                                    <br/>
+                                    <u>3-صيانه و خدمه السياره :</u>
+                                    <br/>
+                                    يقر المستاجر بمسؤليته عن صيانه و خدمه السياره اثناء فتره الايجار و اخطار الشركه فورا
+                                    عند حدوث عطل مفاجئ للسياره و لا يجوز للمستاجر تحت اي ظرف من الظروف القيام باي
+                                    اصلاحات للسياره و في حاله قيامه بذلك يحق للشركه مطالبته بالتعويض المناسب و لا تعتمد
+                                    الشركه اي فواتير تقدم من قبل المستاجر
+                                    <br/>
+                                    <br/>
+                                    <u>4-نظام و لوئح المرور و الامن العام :</u>
+                                    <br/>
+                                    يتحمل المستاجر جميع المسئوليات عن سلامته الشخصيه و سلامه المرافقين له بالسياره و يقر
+                                    بانه علي علم تام بنظم المعلومات بنظم و تعليمات الامن العام و المرور و اماكن الطرق
+                                    المحظور فيها سير الاجانب حسب ارشادات وزاره الداخلبه بجمهوريه مصر العربيه
+                                    <br/>
+                                    <br/>
+                                    <u>5- التامين :</u>
+                                    <br/>
+                                    جميع مركبات شركه اوتوليز مؤمنه للقياده داخل الحدود الجغرافيه لجمهوريه مصر العربيه
+                                    فقط و لا يعطي التامين للحوادث التي تقع نتيجه تجاوز السرعه القانونيه علي طرق السير و
+                                    القياده تحت حاله حاله السكر و تعاطي المخدرات و عند استخدامها في التعليم او السباق و
+                                    كذلك الاضرار التي قد تصيب السياره نتيحه سحبها من قبل الجهات المختصه و الحوادث التي
+                                    قد تقع بسبب الظروف الجويه ز الزلازل
+                                    <br/>
+                                    <br/>
+                                    <u>6-المسؤليات الجنائيه و المدنيه :</u>
+                                    <br/>
+                                    يقر المستاجر بان السياره في مسؤليته جنائيا و مدنيا و انه استلم السياره من الشركه
+                                    خاليه من اي مخالفات او ممنوعات و انه المسؤل وحده عن كافه المخالفات الناجمه عن
+                                    استخدام السياره في اغراض غير مشروعه
+                                    <br/>
+                                    <br/>
+                                    <u>7-الحوادث و الحريق و السرقه :</u>
+                                    <br/>
+                                    في احوال الحوداث او الحريق او سرقه السياره فان المستاجر ملتزم باخطار اقرب نقطة شرطة
+                                    فورا و الحصول علي صوره من تقرير الشرطه و الاتصال فورا باقرب مكتبه للشركه لاتخاذ
+                                    اللازم و في حاله اهمال المستاجر في عدم اتباع هذه التعليمات يتحمل المستاجر كافه
+                                    المسؤليات القانونيه الناجمه عن ذلك
+                                    <br/>
+                                    <br/>
+                                    <u>8-البيانات و المستندات المقدمه :</u>
+                                    <br/>
+                                    يقر المستاجر بان جميع البيانات و المستندات المذكوره او المقدمه من جانبه في هذا العقد
+                                    صحيحه و مطابقه لحالته الراهنه و يتعهد باخطار الشركه فورا باي تغيير يطرا عليه مستقبلا
+                                    اثناء مده الايجار و يكون مسئولا منفردا مسؤليه قانونيه كامله تجاه ذلك
+                                    <br/>
+                                    <br/>
+                                    9-في حاله حدوث حادثه اي كان نوعها او حريق او سرقه للسياره يغرم العميل مبلغ 500 دولار
+                                    <br/>
+                                    <br/>
+                                    10-العميل مسئول مسئوليه كامله عن متعلقاته الشخصيه داخل السياره و الشركه غير مسئوله
+                                    <br/>
+                                    عن فقدان اي من الاشياء الشخصيه او اي متعلقات تخص العميل
+                                    <br/>
+                                    <br/>
+                                    <u>11-الاختصاص القضائي :</u>
+                                    <br/>
+                                    و في حاله المنازعات التي تحدث بين المستاجر و الشركه اذا لم تفلح الحلول السلميه في
+                                    تسويتها فان الاختصاص للفصل بينهما يكون للمحاكم االمختصه يكون القرار الصادر ملزم
+                                    لاطراف العقد يحرر هذا العقد من نسختين بيد كل طرف نسخه للعميل بموجبها عند اللزوم
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    توقيع
+                                    المستاجر:....................................................................................................
+                                </td>
+                            </tr>
+                        </table>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
