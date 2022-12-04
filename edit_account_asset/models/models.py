@@ -7,7 +7,7 @@ class BrandCar(models.Model):
     _name = "brand.car"
     _description = "Brand Car"
 
-    name = fields.Char()
+    name = fields.Char(string="name")
 
 
 class ProductTemplateInherit(models.Model):
