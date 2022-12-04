@@ -8,7 +8,7 @@ on:
   push:
     branches: [ "main" , "dev" , "Live" , "Test" ,"staging"]
   pull_request:
-    branches: [ "Live" , "Test"]
+    branches: [ "Live" , "Test","main" , "dev" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
