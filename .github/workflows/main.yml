@@ -6,9 +6,9 @@ name: Testing code
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" , "dev" , "live" , "test" ,"staging"]
+    branches: [ "main" , "dev" , "Live" , "Test" ,"staging"]
   pull_request:
-    branches: [ "live" , "test"]
+    branches: [ "Live" , "Test"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
