@@ -56,3 +56,11 @@ class AccountAssetInherit(models.Model):
     vendor_id = fields.Char(string="Vendor")
     bank_and_check_no = fields.Char(string="Bank and Check NO")
     invoice_no = fields.Char(string="Invoice NO")
+
+
+    def get_multi_compute_depreciation_board(self):
+        for rec in self:
+            rec.compute_depreciation_board()
+    def get_multi_confirm(self):
+        for rec in self:
+            rec.validate()
