@@ -33,31 +33,31 @@
                 </xpath>
             </field>
         </record>
-<!--        <record id="id_view_move_form_inherit_add_days" model="ir.ui.view">-->
-<!--            <field name="name">account move form inherit add days</field>-->
-<!--            <field name="model">account.move</field>-->
-<!--            <field name="inherit_id" ref="account.view_move_form"/>-->
-<!--            <field name="arch" type="xml">-->
-<!--                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']" position="before">-->
-<!--                    <field name="days"/>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//field[@name='line_ids']/tree/field[@name='quantity']" position="before">-->
-<!--                    <field name="days" invisible="1"/>-->
-<!--                </xpath>-->
-<!--            </field>-->
-<!--        </record>-->
-<!--        <template id="id_account_report_invoice_document_inherit_add_days" inherit_id="account.report_invoice_document">-->
-<!--            <xpath expr="//th[@name='th_description']" position="after">-->
-<!--                <th name="th_days" class="text-left">-->
-<!--                    <span>Days</span>-->
-<!--                </th>-->
-<!--            </xpath>-->
-<!--            <xpath expr="//td[@name='account_invoice_line_name']" position="after">-->
-<!--                <td name="account_invoice_line_days">-->
-<!--                    <span t-field="line.days"/>-->
-<!--                </td>-->
-<!--            </xpath>-->
-<!--        </template>-->
+        <!--        <record id="id_view_move_form_inherit_add_days" model="ir.ui.view">-->
+        <!--            <field name="name">account move form inherit add days</field>-->
+        <!--            <field name="model">account.move</field>-->
+        <!--            <field name="inherit_id" ref="account.view_move_form"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']" position="before">-->
+        <!--                    <field name="days"/>-->
+        <!--                </xpath>-->
+        <!--                <xpath expr="//field[@name='line_ids']/tree/field[@name='quantity']" position="before">-->
+        <!--                    <field name="days" invisible="1"/>-->
+        <!--                </xpath>-->
+        <!--            </field>-->
+        <!--        </record>-->
+        <!--        <template id="id_account_report_invoice_document_inherit_add_days" inherit_id="account.report_invoice_document">-->
+        <!--            <xpath expr="//th[@name='th_description']" position="after">-->
+        <!--                <th name="th_days" class="text-left">-->
+        <!--                    <span>Days</span>-->
+        <!--                </th>-->
+        <!--            </xpath>-->
+        <!--            <xpath expr="//td[@name='account_invoice_line_name']" position="after">-->
+        <!--                <td name="account_invoice_line_days">-->
+        <!--                    <span t-field="line.days"/>-->
+        <!--                </td>-->
+        <!--            </xpath>-->
+        <!--        </template>-->
         <record id="id_view_account_asset_inherit_add_fields" model="ir.ui.view">
             <field name="name">view_account_asset_inherit_add_fields</field>
             <field name="model">account.asset</field>
@@ -83,6 +83,28 @@
                         </group>
                     </group>
                 </xpath>
+            </field>
+        </record>
+        <record id="id_action_compute_depreciation" model="ir.actions.server">
+            <field name="name">Compute Depreciation</field>
+            <field name="model_id" ref="account_asset.model_account_asset"/>
+            <field name="binding_model_id" ref="account_asset.model_account_asset"/>
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                records.compute_depreciation_board()
+            </field>
+        </record>
+        <record id="id_action_validate" model="ir.actions.server">
+            <field name="name">Confirm </field>
+            <field name="model_id" ref="account_asset.model_account_asset"/>
+            <field name="binding_model_id" ref="account_asset.model_account_asset"/>
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                records.validate()
             </field>
         </record>
     </data>
