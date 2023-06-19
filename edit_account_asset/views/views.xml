@@ -93,8 +93,7 @@
             <field name="state">code</field>
             <field name="code">
                 if records:
-                for rec in records:
-                rec.compute_depreciation_board()
+                records.compute_depreciation_board()
             </field>
         </record>
         <record id="id_action_validate" model="ir.actions.server">
@@ -105,8 +104,7 @@
             <field name="state">code</field>
             <field name="code">
                 if records:
-                for rec in records:
-                rec.validate()
+                records.validate()
             </field>
         </record>
     </data>
