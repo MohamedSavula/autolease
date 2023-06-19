@@ -93,7 +93,7 @@
             <field name="state">code</field>
             <field name="code">
                 if records:
-                records.get_multi_compute_depreciation_board
+                records.get_multi_compute_depreciation_board()
             </field>
         </record>
         <record id="id_action_validate" model="ir.actions.server">
@@ -104,7 +104,7 @@
             <field name="state">code</field>
             <field name="code">
                 if records:
-                records.get_multi_confirm
+                records.get_multi_confirm()
             </field>
         </record>
     </data>
