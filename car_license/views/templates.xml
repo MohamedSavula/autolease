@@ -1,0 +1,311 @@
+<odoo>
+    <data>
+        <record id="id_print_car_license" model="ir.actions.report">
+            <field name="name">كشف حساب ترخيص سيارة</field>
+            <field name="model">car.license</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">car_license.id_print_car_license_template</field>
+            <field name="report_file">'كشف حساب ترخيص سيارة'</field>
+            <field name="print_report_name">'كشف حساب ترخيص سيارة'</field>
+            <field name="binding_model_id" ref="model_car_license"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="id_print_car_license_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout" style="font-family:serif">
+                        <div style="font-size:15px;weight:bold;text-align: center">
+                            كشف حساب ترخيص سيارة
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="row">
+                            <div class="col-6" style="text-align: center">
+                                رقم السيارة :
+                                <span t-field="o.car_num"></span>
+
+                            </div>
+                            <div class="col-6" style="text-align: center">
+                                نوع السيارة :
+                                <span t-field="o.car_type"></span>
+                            </div>
+                        </div>
+                        <br/>
+                        <table style="font-size: 13px; border: 1px solid #73787e;" class="table table-bordered">
+                            <thead>
+                                <tr style="color: #1f499a;">
+                                    <th
+                                            class="text-center">المبلغ
+                                    </th>
+                                    <th
+                                            class="text-center">الصنف
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.paper_inspection"/>
+                                    </td>
+                                    <td class="text-center">
+                                        ورق فحص
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.annual_tax"/>
+                                    </td>
+                                    <td class="text-center">ضريبة سنوية
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.compulsory_insurance"/>
+                                    </td>
+                                    <td class="text-center">تامين اجباري
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.data_update_form"/>
+                                    </td>
+                                    <td class="text-center">استمارة تحديث بيانات
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.electronic_inspection_fees"/>
+                                    </td>
+                                    <td class="text-center">رسوم فحص الكتروني
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.violations_receipt_clearance"/>
+                                    </td>
+                                    <td class="text-center">ايصال مخالفات و براءة ذمة
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.environmental_engineer_electronic_inspection"/>
+                                    </td>
+                                    <td class="text-center">مهندس البيئة و فحص الكتروني
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.fingerprinting_deportation"/>
+                                    </td>
+                                    <td class="text-center">رفع البصمة و ابعاد
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.employee_bonus"/>
+                                    </td>
+                                    <td class="text-center">اكرامية موظف
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.reviewer_bonus"/>
+                                    </td>
+                                    <td class="text-center">كرامية مراجع
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.computer_delivery_bonus"/>
+                                    </td>
+                                    <td class="text-center">اكرامية الكمبيوتر و تسليم
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.traffic_sticker_bonus"/>
+                                    </td>
+                                    <td class="text-center">اكرامية ملصق مرور
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.violations_stamp"/>
+                                    </td>
+                                    <td class="text-center">دمغة مخالفات
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.scale"/>
+                                    </td>
+                                    <td class="text-center">ميزان
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.fire_extinguisher_purchase"/>
+                                    </td>
+                                    <td class="text-center">شراء طفاية
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.treasury_acknowledgment_bonus"/>
+                                    </td>
+                                    <td class="text-center">اكرامية خزينة التبين
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.military_bonus"/>
+                                    </td>
+                                    <td class="text-center">اكرامية عسكري
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.photocopying"/>
+                                    </td>
+                                    <td class="text-center">تصوير
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.violations_printout"/>
+                                    </td>
+                                    <td class="text-center">برنت مخالفات
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.employee_bonus_2"/>
+                                    </td>
+                                    <td class="text-center">اكرامية موظف
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.holder_bag_triangle"/>
+                                    </td>
+                                    <td class="text-center">حافظة \ شنطة \مثلث
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.chain"/>
+                                    </td>
+                                    <td class="text-center">سلسلة
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.rescue_card_funnel_vest"/>
+                                    </td>
+                                    <td class="text-center">كارت انقاذ \ قمع \صديري
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.garage"/>
+                                    </td>
+                                    <td class="text-center">جراج
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.driving_license_inquiry_bonus"/>
+                                    </td>
+                                    <td class="text-center">اكرامية استعلام عن الرخص
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.writing_on_the_car"/>
+                                    </td>
+                                    <td class="text-center">كتابة علي السيارة
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.total"/>
+                                    </td>
+                                    <td class="text-center">الاجمالي
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <div style="font-size:15px;weight:bold;text-align: center">
+                            <span t-field="o.total_in_ar"/>
+                            <br/>
+                        </div>
+                        <br/>
+                        <div class="row" style="font-size:15px;weight:bold;text-align: center">
+                            <div class="col-4">
+                                اعتمد
+                            </div>
+                            <div class="col-4">
+                                مدير الحركة
+                            </div>
+                            <div class="col-4">
+                                المطالب
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

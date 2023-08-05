@@ -1,0 +1,96 @@
+<odoo>
+    <data>
+        <record id="id_form_view_car_license" model="ir.ui.view">
+            <field name="name">car_license</field>
+            <field name="model">car.license</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="car_num"/>
+                                <field name="car_type"/>
+                            </group>
+                            <group>
+
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Outgoings">
+                                <group>
+                                    <group>
+                                        <field name="paper_inspection"/>
+                                        <field name="annual_tax"/>
+                                        <field name="compulsory_insurance"/>
+                                        <field name="data_update_form"/>
+                                        <field name="electronic_inspection_fees"/>
+                                        <field name="violations_receipt_clearance"/>
+                                        <field name="environmental_engineer_electronic_inspection"/>
+                                        <field name="fingerprinting_deportation"/>
+                                        <field name="employee_bonus"/>
+                                        <field name="reviewer_bonus"/>
+                                        <field name="computer_delivery_bonus"/>
+                                        <field name="traffic_sticker_bonus"/>
+                                        <field name="violations_stamp"/>
+                                    </group>
+                                    <group>
+                                        <field name="scale"/>
+                                        <field name="fire_extinguisher_purchase"/>
+                                        <field name="treasury_acknowledgment_bonus"/>
+                                        <field name="military_bonus"/>
+                                        <field name="photocopying"/>
+                                        <field name="violations_printout"/>
+                                        <field name="employee_bonus_2"/>
+                                        <field name="holder_bag_triangle"/>
+                                        <field name="chain"/>
+                                        <field name="rescue_card_funnel_vest"/>
+                                        <field name="garage"/>
+                                        <field name="driving_license_inquiry_bonus"/>
+                                        <field name="writing_on_the_car"/>
+                                        <field name="total_in_ar" invisible="1"/>
+                                    </group>
+                                </group>
+                                <div class="row">
+                                    <div class="col-4"></div>
+                                    <div class="col-4">
+                                        <label for="total" string="Total"/>
+                                        <field name="total" readonly="1"/>
+                                    </div>
+                                    <div class="col-4"></div>
+                                </div>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="id_tree_view_car_license" model="ir.ui.view">
+            <field name="name">car license</field>
+            <field name="model">car.license</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="car_num"/>
+                    <field name="car_type"/>
+                    <field name="total"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="id_action_car_license" model="ir.actions.act_window">
+            <field name="name">كشف حساب ترخيص سيارة</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">car.license</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+            </field>
+        </record>
+
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="id_car_license_menu" name="كشف حساب ترخيص سيارة" parent="account.menu_finance_receivables"
+                  action="id_action_car_license" sequence="111"/>
+    </data>
+</odoo>

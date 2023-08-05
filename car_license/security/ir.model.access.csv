@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+car_license.access_car_license,access_car_license,car_license.model_car_license,base.group_user,1,1,1,1
