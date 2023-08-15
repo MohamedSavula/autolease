@@ -1,5 +1,21 @@
 <odoo>
     <data>
+
+        <record id="id_paper_format_car_license" model="report.paperformat">
+            <field name="name">Print po</field>
+            <field name="default" eval="True"/>
+            <field name="format">A3</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">20</field>
+            <field name="margin_bottom">20</field>
+            <field name="margin_left">20</field>
+            <field name="margin_right">20</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">15</field>
+            <field name="dpi">90</field>
+        </record>
+
+
         <record id="id_print_car_license" model="ir.actions.report">
             <field name="name">كشف حساب ترخيص سيارة</field>
             <field name="model">car.license</field>
@@ -9,13 +25,15 @@
             <field name="print_report_name">'كشف حساب ترخيص سيارة'</field>
             <field name="binding_model_id" ref="model_car_license"/>
             <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="car_license.id_paper_format_car_license"/>
         </record>
 
         <template id="id_print_car_license_template">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
-                    <t t-call="web.external_layout" style="font-family:serif">
-                        <div style="font-size:15px;weight:bold;text-align: center">
+                    <t t-call="web.external_layout" style="font-family:serif;font-size:13px">
+
+                        <div style="font-size:13px;weight:bold;text-align: center">
                             كشف حساب ترخيص سيارة
                         </div>
                         <br/>
@@ -32,7 +50,9 @@
                             </div>
                         </div>
                         <br/>
-                        <table style="font-size: 13px; border: 1px solid #73787e;" class="table table-bordered">
+                        <table style="font-size: 13px; border: 1px solid #73787e; padding: 1px;"
+                               class="table table-bordered">
+
                             <thead>
                                 <tr style="color: #1f499a;">
                                     <th
@@ -60,7 +80,6 @@
                                     <td class="text-center">ضريبة سنوية
 
                                     </td>
-
                                 </tr>
                                 <tr>
                                     <td class="text-center">
@@ -287,12 +306,12 @@
                             </tbody>
                         </table>
                         <br/>
-                        <div style="font-size:15px;weight:bold;text-align: center">
+                        <div style="font-size:13px;weight:bold;text-align: center">
                             <span t-field="o.total_in_ar"/>
                             <br/>
                         </div>
                         <br/>
-                        <div class="row" style="font-size:15px;weight:bold;text-align: center">
+                        <div class="row" style="font-size:13px;weight:bold;text-align: center">
                             <div class="col-4">
                                 اعتمد
                             </div>

@@ -4,7 +4,7 @@
             <field name="name">car_license</field>
             <field name="model">car.license</field>
             <field name="arch" type="xml">
-                <form string="">
+                <form>
                     <sheet>
                         <group>
                             <group>
