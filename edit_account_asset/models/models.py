@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields
+from odoo import models, fields, api
 
 
 class BrandCar(models.Model):
@@ -56,11 +56,23 @@ class AccountAssetInherit(models.Model):
     vendor_id = fields.Char(string="Vendor")
     bank_and_check_no = fields.Char(string="Bank and Check NO")
     invoice_no = fields.Char(string="Invoice NO")
-
+    sequence = fields.Char(string="Sequence", default='New', readonly=1, copy=False, tracking=True)
 
     def get_multi_compute_depreciation_board(self):
         for rec in self:
             rec.compute_depreciation_board()
+
     def get_multi_confirm(self):
         for rec in self:
             rec.validate()
+
+    @api.model
+    def create(self, vals_list):
+        res = super().create(vals_list)
+        for rec in res:
+            rec.sequence = self.env['ir.sequence'].next_by_code('account.asset')
+        return res
+
+    def sequence_customize(self):
+        for rec in self:
+            rec.sequence = self.env['ir.sequence'].next_by_code('account.asset')
