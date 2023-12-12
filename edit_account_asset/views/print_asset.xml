@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="id_print_account_asset" model="ir.actions.report">
+            <field name="name">Print</field>
+            <field name="model">account.asset</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">edit_account_asset.id_print_account_asset_template</field>
+            <field name="report_file">edit_account_asset.id_print_account_asset_template</field>
+            <field name="binding_model_id" ref="account_asset.model_account_asset"/>
+            <field name="binding_type">report</field>
+        </record>
+        <template id="id_print_account_asset_template">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <t t-foreach="docs" t-as="o">
+                        <div class="page">
+                            <div class="row">
+                                <div class="col-6 text-center">
+                                    Sequence :
+                                    <strong t-field="o.sequence"/>
+                                </div>
+                                <div class="col-6 text-center">
+                                    Asset Name :
+                                    <strong t-field="o.name"/>
+                                </div>
+                            </div>
+                            <br/>
+                            <table width="100%">
+                                <tr>
+                                    <td colspan="2">
+                                        Asset Values
+                                    </td>
+                                    <td colspan="2">
+                                        Current Values
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Original Value
+                                    </td>
+                                    <td>
+                                        <span t-field="o.original_value"/>
+                                    </td>
+                                    <td>
+                                        Not Depreciable Value
+                                    </td>
+                                    <td>
+                                        <span t-field="o.salvage_value"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Acquisition Date
+                                    </td>
+                                    <td>
+                                        <span t-field="o.acquisition_date"/>
+                                    </td>
+                                    <td>
+                                        Depreciable Value
+                                    </td>
+                                    <td>
+                                        <span t-field="o.value_residual"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td>
+                                        Book Value
+                                    </td>
+                                    <td>
+                                        <span t-field="o.book_value"/>
+                                    </td>
+                                </tr>
+                                <tr style="height: 10px;"/>
+                                <tr>
+                                    <td colspan="2">
+                                        Depreciation Method
+                                    </td>
+                                    <td colspan="2">
+                                        Existing Depreciation Schedule
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Method
+                                    </td>
+                                    <td>
+                                        <span t-field="o.method"/>
+                                    </td>
+                                    <td>
+                                        Depreciated Amount
+                                    </td>
+                                    <td>
+                                        <span t-field="o.already_depreciated_amount_import"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Duration
+                                    </td>
+                                    <td>
+                                        <span t-field="o.method_number"/>
+                                        <span t-field="o.method_period"/>
+                                    </td>
+                                    <td>
+                                        Existing Depreciations
+                                    </td>
+                                    <td>
+                                        <span t-field="o.depreciation_number_import"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Start Depreciating
+                                    </td>
+                                    <td>
+                                        <span t-field="o.first_depreciation_date"/>
+                                    </td>
+                                    <td>
+                                        First Depreciation Date
+                                    </td>
+                                    <td>
+                                        <span t-field="o.first_depreciation_date_import"/>
+                                    </td>
+                                </tr>
+                                <tr style="height: 10px;"/>
+                                <tr>
+                                    <td colspan="2">
+                                        Car Data
+                                    </td>
+                                    <td colspan="2"/>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Engine NO
+                                    </td>
+                                    <td>
+                                        <span t-field="o.engine_no"/>
+                                    </td>
+                                    <td>
+                                        Rent Amount
+                                    </td>
+                                    <td>
+                                        <span t-field="o.rent_amount"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Chassis NO
+                                    </td>
+                                    <td>
+                                        <span t-field="o.chassis_no"/>
+                                    </td>
+                                    <td>
+                                        License Date
+                                    </td>
+                                    <td>
+                                        <span t-field="o.license_date"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Plate NO
+                                    </td>
+                                    <td>
+                                        <span t-field="o.plate_no"/>
+                                    </td>
+                                    <td>
+                                        Branch
+                                    </td>
+                                    <td>
+                                        <span t-field="o.branch_id"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Model NO
+                                    </td>
+                                    <td>
+                                        <span t-field="o.model_no"/>
+                                    </td>
+                                    <td>
+                                        Vendor
+                                    </td>
+                                    <td>
+                                        <span t-field="o.vendor_id"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Car Color
+                                    </td>
+                                    <td>
+                                        <span t-field="o.Car_color"/>
+                                    </td>
+                                    <td>
+                                        Bank and Check NO
+                                    </td>
+                                    <td>
+                                        <span t-field="o.bank_and_check_no"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Insurance Policy NO
+                                    </td>
+                                    <td>
+                                        <span t-field="o.insurance_policy_no"/>
+                                    </td>
+                                    <td>
+                                        Invoice NO
+                                    </td>
+                                    <td>
+                                        <span t-field="o.invoice_no"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">
+                                            <span>Reference</span>
+                                        </th>
+                                        <th class="text-center">
+                                            <span>Depreciation Date</span>
+                                        </th>
+                                        <th class="text-center">
+                                            <span>Depreciation</span>
+                                        </th>
+                                        <th class="text-center">
+                                            <span>Cumulative Depreciation</span>
+                                        </th>
+                                        <th class="text-center">
+                                            <span>Depreciable Value</span>
+                                        </th>
+                                        <th class="text-center">
+                                            <span>Journal Entry</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.depreciation_move_ids" t-as="line">
+                                        <tr>
+                                            <td class="text-center">
+                                                <span t-field="line.ref"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-field="line.date"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-field="line.amount_total"
+                                                      t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-field="line.asset_depreciated_value"
+                                                      t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-field="line.asset_remaining_value"
+                                                      t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-field="line.name"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                            <div class="clearfix">
+                                <div id="total" class="row">
+                                    <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">
+                                        <table class="table table-sm" style="page-break-inside: avoid;">
+                                            <t t-set="depreciation" t-value="sum(o.depreciation_move_ids.mapped('amount_total'))"/>
+                                            <t t-set="cumulative_depreciation" t-value="sum(o.depreciation_move_ids.mapped('asset_depreciated_value'))"/>
+                                            <t t-set="depreciation_value" t-value="sum(o.depreciation_move_ids.mapped('asset_remaining_value'))"/>
+                                            <tr class="border-black font-weight-bold">
+                                                <td>depreciation</td>
+                                                <td class="text-right">
+                                                    <span t-esc="depreciation"
+                                                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                                </td>
+                                            </tr>
+                                            <tr class="border-black font-weight-bold">
+                                                <td>Cumulative Depreciation</td>
+                                                <td class="text-right">
+                                                    <span t-esc="cumulative_depreciation"
+                                                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                                </td>
+                                            </tr>
+                                            <tr class="border-black font-weight-bold">
+                                                <td>Depreciation Value</td>
+                                                <td class="text-right">
+                                                    <span t-esc="depreciation_value"
+                                                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
